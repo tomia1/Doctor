@@ -7,14 +7,14 @@ import static org.controlsfx.control.action.ActionMap.actions;
 public class MyApplication extends ParticleApplication {
 
     public MyApplication() {
-        super("Gluon Desktop Application");
+        super("Tepath verwaltung");
     }
 
     @Override
     public void postInit(Scene scene) {
         scene.getStylesheets().add(MyApplication.class.getResource("style.css").toExternalForm());
 
-        setTitle("Gluon Desktop Application");
+        setTitle("Tepath verwaltung");
 
         getParticle().buildMenu("File -> [exit]", "Help -> [about]");
         
