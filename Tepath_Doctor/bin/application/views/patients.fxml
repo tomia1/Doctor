@@ -1,18 +1,170 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="patients" id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="application.controllers.PatientsController">
+<AnchorPane id="AnchorPane" fx:id="patients" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.PatientsController">
    <children>
-      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Label text="%label.text" />
-            <Button fx:id="button" mnemonicParsing="false" text="Main" />
-         </children>
-      </VBox>
+      <ScrollPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <content>
+            <AnchorPane prefHeight="525.0" prefWidth="561.0">
+               <children>
+                  <VBox prefHeight="525.0" prefWidth="561.0">
+                     <children>
+                        <Label fx:id="PatientendatenL" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Patientendaten" />
+                        <HBox alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="70.0" prefWidth="200.0">
+                           <children>
+                              <Label fx:id="patientL" minWidth="-Infinity" prefHeight="18.0" prefWidth="75.0" text="Patient/in:" />
+                              <ChoiceBox fx:id="patientenwahl" prefHeight="28.0" prefWidth="170.0">
+                                 <HBox.margin>
+                                    <Insets right="20.0" />
+                                 </HBox.margin>
+                              </ChoiceBox>
+                              <VBox prefHeight="50.0" prefWidth="272.0">
+                                 <children>
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Label fx:id="benutzerL" prefHeight="18.0" prefWidth="100.0" text="Benutzername:" />
+                                          <TextField fx:id="benutzerText" />
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Label fx:id="passwortL" prefHeight="18.0" prefWidth="100.0" text="Passwort:" />
+                                          <TextField fx:id="passwortText" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets left="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <Separator prefWidth="200.0" />
+                        <Label fx:id="KontakteL" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Kontakte">
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <HBox alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="50.0" prefWidth="200.0">
+                           <children>
+                              <Label fx:id="hausarztL" minWidth="-Infinity" prefHeight="18.0" prefWidth="75.0" text="Hausarzt:" />
+                              <ChoiceBox fx:id="hausarztwahl" prefHeight="28.0" prefWidth="170.0" />
+                              <Label fx:id="spitalL" minWidth="-Infinity" prefHeight="18.0" prefWidth="75.0" text="Spital:">
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <ChoiceBox fx:id="spitalwahl" prefHeight="28.0" prefWidth="170.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets left="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0">
+                           <children>
+                              <Label fx:id="spezialistL" minWidth="-Infinity" prefHeight="18.0" prefWidth="75.0" text="Spezialist:" />
+                              <ChoiceBox fx:id="spezialistwahl" prefHeight="28.0" prefWidth="170.0" />
+                              <Label fx:id="apothekeL" minWidth="-Infinity" prefHeight="18.0" prefWidth="75.0" text="Apotheke:">
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <ChoiceBox fx:id="apothekenwahl" prefHeight="28.0" prefWidth="170.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets left="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="50.0" prefWidth="200.0">
+                           <children>
+                              <Label fx:id="rehaL" minWidth="-Infinity" prefHeight="18.0" prefWidth="75.0" text="Reha:" />
+                              <ChoiceBox fx:id="rehawahl" prefHeight="28.0" prefWidth="170.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets left="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <Separator prefWidth="200.0" />
+                        <Label fx:id="AblaufL" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Ablauf">
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <HBox alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="50.0" prefWidth="200.0">
+                           <children>
+                              <Label fx:id="terminL" minWidth="-Infinity" prefHeight="18.0" prefWidth="75.0" text="Termine:" />
+                              <ChoiceBox fx:id="terminwahl" prefHeight="28.0" prefWidth="170.0" />
+                              <Label fx:id="datumL" prefHeight="18.0" prefWidth="75.0" text="Datum:">
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <DatePicker fx:id="datumwahl">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </DatePicker>
+                           </children>
+                           <VBox.margin>
+                              <Insets left="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="50.0" prefWidth="200.0">
+                           <children>
+                              <Label fx:id="uhrzeitL" prefHeight="18.0" prefWidth="75.0" text="Uhrzeit:">
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <ChoiceBox fx:id="UhrzeitStunden" prefHeight="28.0" prefWidth="45.0" />
+                              <Label fx:id="zeitseperator" text=":">
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <ChoiceBox fx:id="UhrzeitMinuten" prefHeight="28.0" prefWidth="45.0" />
+                              <Label fx:id="ortL" prefHeight="18.0" prefWidth="75.0" text="Ort:">
+                                 <HBox.margin>
+                                    <Insets left="87.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <ChoiceBox fx:id="ortwahl" prefHeight="28.0" prefWidth="170.0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="520.0">
+                           <children>
+                              <Button fx:id="addTermin" maxWidth="-Infinity" minWidth="30.0" mnemonicParsing="false" onAction="#onActionAdd" prefHeight="33.0" prefWidth="54.0" text="+" />
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </HBox>
+                        <Separator prefWidth="200.0" />
+                        <HBox alignment="CENTER" prefHeight="59.0" prefWidth="561.0" spacing="10.0">
+                           <children>
+                              <Button fx:id="speichern" mnemonicParsing="false" onAction="#onActionSave" text="Speichern" />
+                              <Button fx:id="reset" mnemonicParsing="false" onAction="#onActionReset" text="Reset" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </content>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </ScrollPane>
    </children>
 </AnchorPane>

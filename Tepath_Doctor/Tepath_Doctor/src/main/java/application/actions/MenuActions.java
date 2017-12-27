@@ -19,11 +19,11 @@ public class MenuActions {
         app.exit();
     }
     
-    @ActionProxy(text="About")
+    @ActionProxy(text="Über App")
     private void about() {
         Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("About");
-        alert.setHeaderText("Über Applikation");
+        alert.setTitle("Über App");
+        alert.setHeaderText("Über Tepath Verwaltung");
         alert.setGraphic(new ImageView(new Image(MenuActions.class.getResource("/tep.JPG").toExternalForm(), 48, 48, true, true)));
         alert.setContentText("Dies ist die Desktop Applikation für die App 'Tepath'. "
         		+ "Hier kann der Arzt die Daten in der Applikation verwalten. "
@@ -32,6 +32,8 @@ public class MenuActions {
         alert.showAndWait();
     }
     
+  
+    
     @ActionProxy(text="Kontakt")
     private void kontakt() {
     	Alert alert1 = new Alert(AlertType.INFORMATION);
@@ -39,12 +41,11 @@ public class MenuActions {
     	alert1.setHeaderText("Kontaktieren Sie uns");
     	alert1.setGraphic(new ImageView(new Image(MenuActions.class.getResource("").toExternalForm(), 48, 48, true, true)));
     	alert1.setContentText("Wenn Sie Fragen haben, zögern Sie nicht uns zu kontaktieren.\n"
-    			+ "Unter: www.tepath-verwaltung.ch\n"
+    			+ "Unter: info@tepath.ch\n"
     			+ "oder\n"
-    			+ "Mail an: info@tepath.verwaltung.ch");
+    			+ "Mail senden");
     	alert1.showAndWait();
     	
     }
- 
         
 }

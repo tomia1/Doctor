@@ -1,17 +1,20 @@
 package application.controllers;
 
+import java.util.ResourceBundle;
+
+import javax.inject.Inject;
+
+import org.controlsfx.control.action.ActionMap;
+
 import com.gluonhq.particle.application.ParticleApplication;
 import com.gluonhq.particle.state.StateManager;
 import com.gluonhq.particle.view.ViewManager;
-import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextInputDialog;
-import javax.inject.Inject;
-import org.controlsfx.control.action.Action;
-import org.controlsfx.control.action.ActionMap;
-import org.controlsfx.control.action.ActionProxy;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 
 public class LoginController {
 
@@ -24,21 +27,37 @@ public class LoginController {
     private boolean first = true;
     
     @FXML
-    private Label label;
-    
-    @FXML
-    private Button button;
+    private AnchorPane login;
     
     @FXML
     private ResourceBundle resources;
     
-    private Action actionSignin;
+    @FXML
+    private Label welcomeLabel;
+    
+    @FXML
+    private Label infoLabel;
+    
+    @FXML
+    private Label benutzerLabel;
+    
+    @FXML
+    private TextField benutzerText;
+    
+    @FXML
+    private Label passLabel;
+    
+    @FXML
+    private TextField passwortText;
+    
+    @FXML
+    private Button btnAnmelden;
+    
     
     public void initialize() {
         ActionMap.register(this);
-        actionSignin =  ActionMap.action("signin");
         
-        button.setOnAction(e -> viewManager.switchView("patients"));
+        btnAnmelden.setOnAction(e -> viewManager.switchView("patients"));
         
     }
     
@@ -48,25 +67,14 @@ public class LoginController {
             addUser(stateManager.getProperty("UserName").orElse("").toString());
             first = false;
         }
-        app.getParticle().getToolBarActions().add(0, actionSignin);
     }
     
     public void dispose() {
-        app.getParticle().getToolBarActions().remove(actionSignin);
     }
     
     public void addUser(String userName) {
-        label.setText(resources.getString("label.text") + (userName.isEmpty() ? "" :  ", " + userName) + "!");
+        welcomeLabel.getText();
         stateManager.setProperty("UserName", userName);
-    }
-
-    @ActionProxy(text="Sign In")
-    private void signin() {
-        TextInputDialog input = new TextInputDialog(stateManager.getProperty("UserName").orElse("").toString());
-        input.setTitle("User name");
-        input.setHeaderText(null);
-        input.setContentText("Input your name:");
-        input.showAndWait().ifPresent(this::addUser);
     }
     
 }
