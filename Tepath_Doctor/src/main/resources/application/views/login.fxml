@@ -13,10 +13,10 @@
 
 <AnchorPane id="AnchorPane" fx:id="login" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.LoginController">
    <children>
-      <VBox prefHeight="400.0" prefWidth="600.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
+      <VBox prefHeight="400.0" prefWidth="600.0" spacing="0.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
          <children>
-            <Label fx:id="welcomeLabel" text="Willkommen zur Desktopanwendung der Applikation &quot;TEPATH&quot;!" />
-            <Label fx:id="infoLabel" prefHeight="53.0" prefWidth="600.0" text="Um auf die Patientendaten zuzugreifen und diese verwalten können, müssen Sie sich zuerst anmelden." wrapText="true" />
+            <Label fx:id="welcomeLabel" style="-fx-font-size: 20;" text="Willkommen zur Desktopanwendung der Applikation &quot;TEPATH&quot;!" wrapText="true" />
+            <Label fx:id="infoLabel" prefHeight="70.0" prefWidth="600.0" style="-fx-font-size: 20;" text="Um auf die Patientendaten zuzugreifen und diese verwalten können, müssen Sie sich zuerst anmelden." wrapText="true" />
             <VBox prefHeight="112.0" prefWidth="580.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="31.0" prefWidth="580.0">
@@ -31,18 +31,18 @@
                         <PasswordField fx:id="passwortText" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="57.0" prefWidth="420.0">
+                  <HBox alignment="CENTER_RIGHT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="57.0" prefWidth="410.0">
                      <children>
-                        <Button fx:id="btnAnmelden" mnemonicParsing="false" prefHeight="32.0" prefWidth="82.0" text="Anmelden" />
+                        <Button fx:id="btnAnmelden" mnemonicParsing="false" onAction="#onActionLogin" prefHeight="32.0" prefWidth="82.0" text="Anmelden" />
                      </children>
                   </HBox>
                </children>
             </VBox>
             <HBox alignment="CENTER" prefHeight="125.0" prefWidth="580.0">
                <children>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="122.0" fitWidth="118.0">
                      <image>
-                        <Image url="@../git/Doctor/Tepath_Doctor/src/main/resources/tep.JPG" />
+                        <Image url="@../../tep.JPG" />
                      </image>
                   </ImageView>
                </children>

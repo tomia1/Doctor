@@ -10,6 +10,7 @@ import com.gluonhq.particle.application.ParticleApplication;
 import com.gluonhq.particle.state.StateManager;
 import com.gluonhq.particle.view.ViewManager;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -53,12 +54,27 @@ public class LoginController {
     @FXML
     private Button btnAnmelden;
     
+    @FXML
+    void onActionLogin(ActionEvent event) {
+    	if(benutzerText.getText().equals("hager") && passwortText.getText().equals("hager")) {
+    		 btnAnmelden.setOnAction(e -> viewManager.switchView("patients"));	
+    	} else if((!benutzerText.getText().equals("hager") && !benutzerText.getText().equals(null)) 
+    			|| (!passwortText.getText().equals("hager") && !passwortText.getText().equals(null))) {
+    		benutzerText.setText(null);
+    		benutzerText.setPromptText("Benutzer evtl. falsch");
+    		passwortText.setText(null);
+    		passwortText.setPromptText("Passwort evtl. falsch");
+    	} else {
+    		benutzerText.setPromptText("Benutzer evtl. falsch");
+    		passwortText.setPromptText("Passwort evtl. falsch");
+    	}
+    }
+    
     
     public void initialize() {
         ActionMap.register(this);
-        
-        btnAnmelden.setOnAction(e -> viewManager.switchView("patients"));
-        
+//		 btnAnmelden.setOnAction(e -> viewManager.switchView("patients"));	
+                
     }
     
     public void postInit() {
