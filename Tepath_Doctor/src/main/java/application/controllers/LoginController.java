@@ -17,6 +17,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
+/**
+ * Die Klasse LoginController beinhaltet das Login für den Arzt. Einfach gestaltet mit einer kurzen Begruessung
+ * und einem Login mit Benutzername, Passwort und Login-Button.
+ * Die Klasse LoginController ist die Controller-Klasse für die FXML-Datei login.fxml.
+ * @author Hager
+ *
+ */
 public class LoginController {
 
     @Inject ParticleApplication app;
@@ -27,6 +34,9 @@ public class LoginController {
     
     private boolean first = true;
     
+    /**
+     * Hier sind die Ferlder für die FXML-Datei definiert.
+     */
     @FXML
     private AnchorPane login;
     
@@ -54,11 +64,19 @@ public class LoginController {
     @FXML
     private Button btnAnmelden;
     
+    /**
+     * Damit der Arzt auf die Patientenverwaltung zugreifen kann, muss er sich zuerst einloggen.
+     * Wenn das Feld fuer Benutzername/Passwort leer oder nicht das richtige enthaelt wird im Feld Benutzername
+     * "Benutzername evtl. Falsch" und im Feld Passwort "Passwort evtl. falsch" angezeigt
+     * @param event login
+     */
     @FXML
     void onActionLogin(ActionEvent event) {
     	if(benutzerText.getText().equals("hager") && passwortText.getText().equals("hager")) {
     		 btnAnmelden.setOnAction(e -> viewManager.switchView("patients"));	
-    	} else if((!benutzerText.getText().equals("hager") && !benutzerText.getText().equals(null)) 
+    	} else if((!benutzerText.getText().equals("hager") || !benutzerText.getText().equals(null)) 
+    			|| (!passwortText.getText().equals("hager") || !passwortText.getText().equals(null))
+    			||(!benutzerText.getText().equals("hager") && !benutzerText.getText().equals(null)) 
     			|| (!passwortText.getText().equals("hager") && !passwortText.getText().equals(null))) {
     		benutzerText.setText(null);
     		benutzerText.setPromptText("Benutzer evtl. falsch");
@@ -73,7 +91,6 @@ public class LoginController {
     
     public void initialize() {
         ActionMap.register(this);
-//		 btnAnmelden.setOnAction(e -> viewManager.switchView("patients"));	
                 
     }
     

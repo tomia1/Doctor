@@ -15,11 +15,26 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+
+
+/**
+ * Die Klasse PatientController beinhaltet alle Informationen die vom Arzt erfasst und gespeichert werden.
+ * Der Arzt Verwaltet hier die Termine der Patienten, die Aerzte und Institutionen die der Patient besucht
+ * und die Login Daten für den Patienten. Auf dieser Oberflaeche werden alle Daten eingetragen, welche der 
+ * Patient anschliessend auf seiner Mobilen App zu sehen bekommt.
+ * Die PatientController ist die Controller-Klasse für die FXML-Datei patient.fxml. 
+ * @author Hager
+ *
+ */
 
 public class PatientsController {
 
@@ -27,7 +42,10 @@ public class PatientsController {
     
     @Inject private ViewManager viewManager;
 
-
+/**
+ * Hier werden die Felder definiert welche in der FXML-Datei erstellt wurden.
+ */
+    
     @FXML
     private AnchorPane patients;
 
@@ -537,6 +555,51 @@ public class PatientsController {
     
     @FXML
     private ChoiceBox<Object> ortwahl14;
+    
+    @FXML
+    private ComboBox<Object> statusBox;
+    
+    @FXML
+    private ComboBox<Object> statusBox1;
+    
+    @FXML
+    private ComboBox<Object> statusBox2;
+    
+    @FXML
+    private ComboBox<Object> statusBox3;
+    
+    @FXML
+    private ComboBox<Object> statusBox4;
+    
+    @FXML
+    private ComboBox<Object> statusBox5;
+    
+    @FXML
+    private ComboBox<Object> statusBox6;
+    
+    @FXML
+    private ComboBox<Object> statusBox7;
+    
+    @FXML
+    private ComboBox<Object> statusBox8;
+    
+    @FXML
+    private ComboBox<Object> statusBox9;
+    
+    @FXML
+    private ComboBox<Object> statusBox10;
+    
+    @FXML
+    private ComboBox<Object> statusBox11;
+    
+    @FXML
+    private ComboBox<Object> statusBox12;
+    
+    @FXML
+    private ComboBox<Object> statusBox13;
+    
+    @FXML
+    private ComboBox<Object> statusBox14;
 
     @FXML
     private Button speichern;
@@ -653,7 +716,10 @@ public class PatientsController {
     }
 
     
-    // Die Felder werder bei speicherung der Informationen deaktiviert und koennen nicht bearbeitet werden.
+/**Die Felder werder bei speicherung der Informationen deaktiviert und koennen nicht bearbeitet werden.
+ * Die Informationen die hier eingegeben worden sind sollen unter dem Patienten abgespeichert werden.
+ * @param event speichern der Informationen
+ */
     
     @FXML
     void onActionSave(ActionEvent event) {
@@ -679,6 +745,10 @@ public class PatientsController {
         ActionMap.register(this);
         actionHome =  ActionMap.action("goHome");
         
+        /**
+         * Die einzelnen ChoiceBoxen werden hier mit Informationen/Auswahlmoeglichkeiten befüllt.
+         */
+        
         //choiceBox pateintenwahl Elemente hinzufügen
         ((ChoiceBox<Object>)patientenwahl).getItems().addAll("", "Elisabeth Brönimann",
         		"Susanne Meier", "Margrit Bauer");
@@ -701,6 +771,13 @@ public class PatientsController {
         //choiceBox spezialist Elemente hinzufügen
         ((ChoiceBox<Object>)spezialistwahl).getItems().addAll("", "Dr. Knochenbrecher",
         		"Dr. Müller", "Dr. Profi");
+        
+        /**
+         * Bei den Terminen sind mehrere Termine möglich. Hierfür wurde in der FXML-Datei ein "Accordion" erstellt.
+         * Die einzelnen Termine können so ein-/ausgeblendet werden. Bei den Terminen muss festgelegt werden: Terminart, 
+         * Terminort, Datum des Termins, Zeit des Termins und Status des Termins. 
+         * Jeder einzelne Termin ist einzeln aufklappbar.
+         */
         
         //choiceBox termine Elemente hinzufügen
         ((ChoiceBox<Object>)terminwahl).getItems().addAll("Hausarztbesuch", "Spezialistenbesuch",
@@ -1016,6 +1093,54 @@ public class PatientsController {
         ((ChoiceBox<Object>)ortwahl14).getItems().addAll("Hausarzt Praxis", "Spezialist Praxis", 
         		"Spital Empfang", "Stationszimmer", "Radiologieabteilung", "Orthopädieabteilung", 
         		"OP-Abteilung", "Reha Empfang");
+        
+        
+        /**Beim Status wird neben dem Text noch eine Farbe definiert und die Termine unterscheiden zu koennen
+         * nach offene Termine, erledigte Termine oder verschobene Termine. 
+         */
+        Image fertig = new Image("fertig.png");
+        ImageView imgViewFertig = new ImageView();
+        imgViewFertig.setImage(fertig);
+        imgViewFertig.setFitWidth(10);
+        imgViewFertig.setFitHeight(10);
+        Label fertigText = new Label("Erledigt");
+        fertigText.setGraphic(imgViewFertig);
+        fertigText.setTextFill(Color.BLACK);
+        
+        Image offen = new Image("offen.png");
+        ImageView imgViewOffen = new ImageView();
+        imgViewOffen.setImage(offen);
+        imgViewOffen.setFitWidth(10);
+        imgViewOffen.setFitHeight(10);
+        Label offenText = new Label("Offen");
+        offenText.setGraphic(imgViewOffen);
+        offenText.setTextFill(Color.BLACK);
+        
+        Image verschoben = new Image("verschoben.png");
+        ImageView imgViewVerschoben = new ImageView();
+        imgViewVerschoben.setImage(verschoben);
+        imgViewVerschoben.setFitWidth(10);
+        imgViewVerschoben.setFitHeight(10);
+        Label verschobenText = new Label("Verschoben");
+        verschobenText.setGraphic(imgViewVerschoben);
+        verschobenText.setTextFill(Color.BLACK);
+        
+        //hinzufuegen des Status mit Farbbild
+		statusBox.getItems().addAll(fertigText, offenText, verschobenText);
+		statusBox1.getItems().addAll(fertigText, offenText, verschobenText);
+		statusBox2.getItems().addAll(fertigText, offenText, verschobenText);
+		statusBox3.getItems().addAll(fertigText, offenText, verschobenText);
+		statusBox4.getItems().addAll(fertigText, offenText, verschobenText);
+		statusBox5.getItems().addAll(fertigText, offenText, verschobenText);
+		statusBox6.getItems().addAll(fertigText, offenText, verschobenText);
+		statusBox7.getItems().addAll(fertigText, offenText, verschobenText);
+		statusBox8.getItems().addAll(fertigText, offenText, verschobenText);
+		statusBox9.getItems().addAll(fertigText, offenText, verschobenText);
+		statusBox10.getItems().addAll(fertigText, offenText, verschobenText);
+		statusBox11.getItems().addAll(fertigText, offenText, verschobenText);
+		statusBox12.getItems().addAll(fertigText, offenText, verschobenText);
+		statusBox13.getItems().addAll(fertigText, offenText, verschobenText);
+		statusBox14.getItems().addAll(fertigText, offenText, verschobenText);
     }
     
     public void postInit() {
@@ -1026,6 +1151,9 @@ public class PatientsController {
         app.getParticle().getToolBarActions().remove(actionHome);
     }
     
+    /**
+     * Hier ist der Button zum Abmelden und zurueck zur Login Seite zu gehen.
+     */
     @ActionProxy(text = "Abmelden")
     private void goHome() {
         viewManager.switchView("login");

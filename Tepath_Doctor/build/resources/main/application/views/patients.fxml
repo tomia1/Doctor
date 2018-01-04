@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -14,855 +15,1254 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" fx:id="patients" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.PatientsController">
-   <children>
-      <ScrollPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <content>
-            <AnchorPane minHeight="-Infinity" prefHeight="1000.0" prefWidth="561.0">
-               <children>
-                  <VBox minHeight="-Infinity" prefHeight="525.0" prefWidth="561.0">
-                     <children>
-                        <Label fx:id="PatientendatenL" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Patientendaten" />
-                        <HBox alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="70.0" prefWidth="200.0">
-                           <children>
-                              <Label fx:id="patientL" minWidth="-Infinity" prefHeight="18.0" prefWidth="75.0" text="Patient/in:" />
-                              <ChoiceBox fx:id="patientenwahl" prefHeight="28.0" prefWidth="170.0">
-                                 <HBox.margin>
-                                    <Insets right="20.0" />
-                                 </HBox.margin>
-                              </ChoiceBox>
-                              <VBox prefHeight="50.0" prefWidth="272.0">
-                                 <children>
-                                    <HBox prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <Label fx:id="benutzerL" prefHeight="18.0" prefWidth="100.0" text="Benutzername:" />
-                                          <TextField fx:id="benutzerText" />
-                                       </children>
-                                    </HBox>
-                                    <HBox prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <Label fx:id="passwortL" prefHeight="18.0" prefWidth="100.0" text="Passwort:" />
-                                          <TextField fx:id="passwortText" />
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </VBox>
-                           </children>
-                           <VBox.margin>
-                              <Insets left="10.0" />
-                           </VBox.margin>
-                        </HBox>
-                        <Separator prefWidth="200.0" />
-                        <Label fx:id="KontakteL" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Kontakte">
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
-                        </Label>
-                        <HBox alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="50.0" prefWidth="200.0">
-                           <children>
-                              <Label fx:id="hausarztL" minWidth="-Infinity" prefHeight="18.0" prefWidth="75.0" text="Hausarzt:" />
-                              <ChoiceBox fx:id="hausarztwahl" prefHeight="28.0" prefWidth="170.0" />
-                              <Label fx:id="spitalL" minWidth="-Infinity" prefHeight="18.0" prefWidth="75.0" text="Spital:">
-                                 <HBox.margin>
-                                    <Insets left="20.0" />
-                                 </HBox.margin>
-                              </Label>
-                              <ChoiceBox fx:id="spitalwahl" prefHeight="28.0" prefWidth="170.0" />
-                           </children>
-                           <VBox.margin>
-                              <Insets left="10.0" />
-                           </VBox.margin>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0">
-                           <children>
-                              <Label fx:id="spezialistL" minWidth="-Infinity" prefHeight="18.0" prefWidth="75.0" text="Spezialist:" />
-                              <ChoiceBox fx:id="spezialistwahl" prefHeight="28.0" prefWidth="170.0" />
-                              <Label fx:id="apothekeL" minWidth="-Infinity" prefHeight="18.0" prefWidth="75.0" text="Apotheke:">
-                                 <HBox.margin>
-                                    <Insets left="20.0" />
-                                 </HBox.margin>
-                              </Label>
-                              <ChoiceBox fx:id="apothekenwahl" prefHeight="28.0" prefWidth="170.0" />
-                           </children>
-                           <VBox.margin>
-                              <Insets left="10.0" />
-                           </VBox.margin>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="50.0" prefWidth="200.0">
-                           <children>
-                              <Label fx:id="rehaL" minWidth="-Infinity" prefHeight="18.0" prefWidth="75.0" text="Reha:" />
-                              <ChoiceBox fx:id="rehawahl" prefHeight="28.0" prefWidth="170.0" />
-                           </children>
-                           <VBox.margin>
-                              <Insets left="10.0" />
-                           </VBox.margin>
-                        </HBox>
-                        <Separator prefWidth="200.0" />
-                        <Label fx:id="AblaufL" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Ablauf">
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
-                        </Label>
-                        <HBox fx:id="terminBox1" alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="50.0" prefWidth="200.0">
-                           <children>
-                              <Label fx:id="terminL" minWidth="-Infinity" prefHeight="18.0" prefWidth="75.0" text="Termine:" />
-                              <ChoiceBox fx:id="terminwahl" prefHeight="28.0" prefWidth="170.0" />
-                              <Label fx:id="datumL" prefHeight="18.0" prefWidth="75.0" text="Datum:">
-                                 <HBox.margin>
-                                    <Insets left="20.0" />
-                                 </HBox.margin>
-                              </Label>
-                              <DatePicker fx:id="datumwahl">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </DatePicker>
-                           </children>
-                           <VBox.margin>
-                              <Insets left="10.0" />
-                           </VBox.margin>
-                        </HBox>
-                        <HBox fx:id="terminBox2" alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="50.0" prefWidth="200.0">
-                           <children>
-                              <Label fx:id="uhrzeitL" prefHeight="18.0" prefWidth="75.0" text="Uhrzeit:">
-                                 <HBox.margin>
-                                    <Insets left="10.0" />
-                                 </HBox.margin>
-                              </Label>
-                              <ChoiceBox fx:id="UhrzeitStunden" prefHeight="28.0" prefWidth="45.0" />
-                              <Label fx:id="zeitseperator" text=":">
-                                 <HBox.margin>
-                                    <Insets left="5.0" right="5.0" />
-                                 </HBox.margin>
-                              </Label>
-                              <ChoiceBox fx:id="UhrzeitMinuten" prefHeight="28.0" prefWidth="45.0" />
-                              <Label fx:id="ortL" prefHeight="18.0" prefWidth="75.0" text="Ort:">
-                                 <HBox.margin>
-                                    <Insets left="87.0" />
-                                 </HBox.margin>
-                              </Label>
-                              <ChoiceBox fx:id="ortwahl" prefHeight="28.0" prefWidth="170.0" />
-                           </children>
-                        </HBox>
-                        <Separator prefWidth="200.0" />
-                        <Accordion prefHeight="207.0" prefWidth="561.0">
-                          <panes>
-                            <TitledPane animated="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" prefWidth="561.0" text="Termin hinzufügen">
-                              <content>
-                                <AnchorPane maxHeight="-Infinity" minHeight="99.0" minWidth="0.0" prefHeight="99.0" prefWidth="559.0">
-                                       <children>
-                                          <HBox fx:id="terminBox11" alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="50.0" prefWidth="560.0">
-                                             <children>
-                                                <Label fx:id="terminL1" minWidth="-Infinity" prefHeight="18.0" prefWidth="75.0" text="Termine:">
-                                                   <HBox.margin>
-                                                      <Insets left="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="terminwahl1" prefHeight="28.0" prefWidth="170.0" />
-                                                <Label fx:id="datumL1" prefHeight="18.0" prefWidth="75.0" text="Datum:">
-                                                   <HBox.margin>
-                                                      <Insets left="20.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <DatePicker fx:id="datumwahl1">
-                                                   <HBox.margin>
-                                                      <Insets />
-                                                   </HBox.margin>
-                                                </DatePicker>
-                                             </children>
-                                          </HBox>
-                                          <HBox fx:id="terminBox21" alignment="CENTER_LEFT" layoutY="50.0" minHeight="-Infinity" prefHeight="50.0" prefWidth="562.0">
-                                             <children>
-                                                <Label fx:id="uhrzeitL1" prefHeight="18.0" prefWidth="75.0" text="Uhrzeit:">
-                                                   <HBox.margin>
-                                                      <Insets left="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="UhrzeitStunden1" prefHeight="28.0" prefWidth="45.0" />
-                                                <Label fx:id="zeitseperator1" text=":">
-                                                   <HBox.margin>
-                                                      <Insets left="5.0" right="5.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="UhrzeitMinuten1" prefHeight="28.0" prefWidth="45.0" />
-                                                <Label fx:id="ortL1" prefHeight="18.0" prefWidth="75.0" text="Ort:">
-                                                   <HBox.margin>
-                                                      <Insets left="87.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="ortwahl1" prefHeight="28.0" prefWidth="170.0" />
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </AnchorPane>
-                              </content>
-                            </TitledPane>
-                            <TitledPane animated="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" prefWidth="561.0" text="Termin hinzufügen">
-                                 <content>
-                                    <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="98.0" prefWidth="559.0">
-                                       <children>
-                                          <HBox fx:id="terminBox12" alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="50.0" prefWidth="560.0">
-                                             <children>
-                                                <Label fx:id="terminL2" minWidth="-Infinity" prefHeight="18.0" prefWidth="75.0" text="Termine:">
-                                                   <HBox.margin>
-                                                      <Insets left="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="terminwahl2" prefHeight="28.0" prefWidth="170.0" />
-                                                <Label fx:id="datumL2" prefHeight="18.0" prefWidth="75.0" text="Datum:">
-                                                   <HBox.margin>
-                                                      <Insets left="20.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <DatePicker fx:id="datumwahl2">
-                                                   <HBox.margin>
-                                                      <Insets />
-                                                   </HBox.margin>
-                                                </DatePicker>
-                                             </children>
-                                          </HBox>
-                                          <HBox fx:id="terminBox22" alignment="CENTER_LEFT" layoutY="50.0" minHeight="-Infinity" prefHeight="50.0" prefWidth="562.0">
-                                             <children>
-                                                <Label fx:id="uhrzeitL2" prefHeight="18.0" prefWidth="75.0" text="Uhrzeit:">
-                                                   <HBox.margin>
-                                                      <Insets left="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="UhrzeitStunden2" prefHeight="28.0" prefWidth="45.0" />
-                                                <Label fx:id="zeitseperator2" text=":">
-                                                   <HBox.margin>
-                                                      <Insets left="5.0" right="5.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="UhrzeitMinuten2" prefHeight="28.0" prefWidth="45.0" />
-                                                <Label fx:id="ortL2" prefHeight="18.0" prefWidth="75.0" text="Ort:">
-                                                   <HBox.margin>
-                                                      <Insets left="87.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="ortwahl2" prefHeight="28.0" prefWidth="170.0" />
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </AnchorPane>
-                                 </content>
-                            </TitledPane>
-                            <TitledPane animated="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="139.0" prefWidth="561.0" text="Termin hinzufügen">
-                                 <content>
-                                    <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="98.0" prefWidth="559.0">
-                                       <children>
-                                          <HBox fx:id="terminBox13" alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="50.0" prefWidth="560.0">
-                                             <children>
-                                                <Label fx:id="terminL3" minWidth="-Infinity" prefHeight="18.0" prefWidth="75.0" text="Termine:">
-                                                   <HBox.margin>
-                                                      <Insets left="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="terminwahl3" prefHeight="28.0" prefWidth="170.0" />
-                                                <Label fx:id="datumL3" prefHeight="18.0" prefWidth="75.0" text="Datum:">
-                                                   <HBox.margin>
-                                                      <Insets left="20.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <DatePicker fx:id="datumwahl3">
-                                                   <HBox.margin>
-                                                      <Insets />
-                                                   </HBox.margin>
-                                                </DatePicker>
-                                             </children>
-                                          </HBox>
-                                          <HBox fx:id="terminBox23" alignment="CENTER_LEFT" layoutY="50.0" minHeight="-Infinity" prefHeight="50.0" prefWidth="562.0">
-                                             <children>
-                                                <Label fx:id="uhrzeitL3" prefHeight="18.0" prefWidth="75.0" text="Uhrzeit:">
-                                                   <HBox.margin>
-                                                      <Insets left="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="UhrzeitStunden3" prefHeight="28.0" prefWidth="45.0" />
-                                                <Label fx:id="zeitseperator3" text=":">
-                                                   <HBox.margin>
-                                                      <Insets left="5.0" right="5.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="UhrzeitMinuten3" prefHeight="28.0" prefWidth="45.0" />
-                                                <Label fx:id="ortL3" prefHeight="18.0" prefWidth="75.0" text="Ort:">
-                                                   <HBox.margin>
-                                                      <Insets left="87.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="ortwahl3" prefHeight="28.0" prefWidth="170.0" />
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </AnchorPane>
-                                 </content>
-                            </TitledPane>
-                              <TitledPane animated="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="139.0" prefWidth="561.0" text="Termin hinzufügen">
-                                 <content>
-                                    <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="98.0" prefWidth="559.0">
-                                       <children>
-                                          <HBox fx:id="terminBox14" alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="50.0" prefWidth="560.0">
-                                             <children>
-                                                <Label fx:id="terminL4" minWidth="-Infinity" prefHeight="18.0" prefWidth="75.0" text="Termine:">
-                                                   <HBox.margin>
-                                                      <Insets left="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="terminwahl4" prefHeight="28.0" prefWidth="170.0" />
-                                                <Label fx:id="datumL4" prefHeight="18.0" prefWidth="75.0" text="Datum:">
-                                                   <HBox.margin>
-                                                      <Insets left="20.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <DatePicker fx:id="datumwahl4">
-                                                   <HBox.margin>
-                                                      <Insets />
-                                                   </HBox.margin>
-                                                </DatePicker>
-                                             </children>
-                                          </HBox>
-                                          <HBox fx:id="terminBox24" alignment="CENTER_LEFT" layoutY="50.0" minHeight="-Infinity" prefHeight="50.0" prefWidth="562.0">
-                                             <children>
-                                                <Label fx:id="uhrzeitL4" prefHeight="18.0" prefWidth="75.0" text="Uhrzeit:">
-                                                   <HBox.margin>
-                                                      <Insets left="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="UhrzeitStunden4" prefHeight="28.0" prefWidth="45.0" />
-                                                <Label fx:id="zeitseperator4" text=":">
-                                                   <HBox.margin>
-                                                      <Insets left="5.0" right="5.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="UhrzeitMinuten4" prefHeight="28.0" prefWidth="45.0" />
-                                                <Label fx:id="ortL4" prefHeight="18.0" prefWidth="75.0" text="Ort:">
-                                                   <HBox.margin>
-                                                      <Insets left="87.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="ortwahl4" prefHeight="28.0" prefWidth="170.0" />
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </AnchorPane>
-                                 </content>
-                              </TitledPane>
-                              <TitledPane animated="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="139.0" prefWidth="561.0" text="Termin hinzufügen">
-                                 <content>
-                                    <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="98.0" prefWidth="559.0">
-                                       <children>
-                                          <HBox fx:id="terminBox15" alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="50.0" prefWidth="560.0">
-                                             <children>
-                                                <Label fx:id="terminL5" minWidth="-Infinity" prefHeight="18.0" prefWidth="75.0" text="Termine:">
-                                                   <HBox.margin>
-                                                      <Insets left="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="terminwahl5" prefHeight="28.0" prefWidth="170.0" />
-                                                <Label fx:id="datumL5" prefHeight="18.0" prefWidth="75.0" text="Datum:">
-                                                   <HBox.margin>
-                                                      <Insets left="20.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <DatePicker fx:id="datumwahl5">
-                                                   <HBox.margin>
-                                                      <Insets />
-                                                   </HBox.margin>
-                                                </DatePicker>
-                                             </children>
-                                          </HBox>
-                                          <HBox fx:id="terminBox25" alignment="CENTER_LEFT" layoutY="50.0" minHeight="-Infinity" prefHeight="50.0" prefWidth="562.0">
-                                             <children>
-                                                <Label fx:id="uhrzeitL5" prefHeight="18.0" prefWidth="75.0" text="Uhrzeit:">
-                                                   <HBox.margin>
-                                                      <Insets left="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="UhrzeitStunden5" prefHeight="28.0" prefWidth="45.0" />
-                                                <Label fx:id="zeitseperator5" text=":">
-                                                   <HBox.margin>
-                                                      <Insets left="5.0" right="5.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="UhrzeitMinuten5" prefHeight="28.0" prefWidth="45.0" />
-                                                <Label fx:id="ortL5" prefHeight="18.0" prefWidth="75.0" text="Ort:">
-                                                   <HBox.margin>
-                                                      <Insets left="87.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="ortwahl5" prefHeight="28.0" prefWidth="170.0" />
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </AnchorPane>
-                                 </content>
-                              </TitledPane>
-                              <TitledPane animated="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="139.0" prefWidth="561.0" text="Termin hinzufügen">
-                                 <content>
-                                    <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="98.0" prefWidth="559.0">
-                                       <children>
-                                          <HBox fx:id="terminBox16" alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="50.0" prefWidth="560.0">
-                                             <children>
-                                                <Label fx:id="terminL6" minWidth="-Infinity" prefHeight="18.0" prefWidth="75.0" text="Termine:">
-                                                   <HBox.margin>
-                                                      <Insets left="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="terminwahl6" prefHeight="28.0" prefWidth="170.0" />
-                                                <Label fx:id="datumL6" prefHeight="18.0" prefWidth="75.0" text="Datum:">
-                                                   <HBox.margin>
-                                                      <Insets left="20.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <DatePicker fx:id="datumwahl6">
-                                                   <HBox.margin>
-                                                      <Insets />
-                                                   </HBox.margin>
-                                                </DatePicker>
-                                             </children>
-                                          </HBox>
-                                          <HBox fx:id="terminBox26" alignment="CENTER_LEFT" layoutY="50.0" minHeight="-Infinity" prefHeight="50.0" prefWidth="562.0">
-                                             <children>
-                                                <Label fx:id="uhrzeitL6" prefHeight="18.0" prefWidth="75.0" text="Uhrzeit:">
-                                                   <HBox.margin>
-                                                      <Insets left="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="UhrzeitStunden6" prefHeight="28.0" prefWidth="45.0" />
-                                                <Label fx:id="zeitseperator6" text=":">
-                                                   <HBox.margin>
-                                                      <Insets left="5.0" right="5.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="UhrzeitMinuten6" prefHeight="28.0" prefWidth="45.0" />
-                                                <Label fx:id="ortL6" prefHeight="18.0" prefWidth="75.0" text="Ort:">
-                                                   <HBox.margin>
-                                                      <Insets left="87.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="ortwahl6" prefHeight="28.0" prefWidth="170.0" />
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </AnchorPane>
-                                 </content>
-                              </TitledPane>
-                              <TitledPane animated="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="139.0" prefWidth="561.0" text="Termin hinzufügen">
-                                 <content>
-                                    <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="98.0" prefWidth="559.0">
-                                       <children>
-                                          <HBox fx:id="terminBox17" alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="50.0" prefWidth="560.0">
-                                             <children>
-                                                <Label fx:id="terminL7" minWidth="-Infinity" prefHeight="18.0" prefWidth="75.0" text="Termine:">
-                                                   <HBox.margin>
-                                                      <Insets left="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="terminwahl7" prefHeight="28.0" prefWidth="170.0" />
-                                                <Label fx:id="datumL7" prefHeight="18.0" prefWidth="75.0" text="Datum:">
-                                                   <HBox.margin>
-                                                      <Insets left="20.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <DatePicker fx:id="datumwahl7">
-                                                   <HBox.margin>
-                                                      <Insets />
-                                                   </HBox.margin>
-                                                </DatePicker>
-                                             </children>
-                                          </HBox>
-                                          <HBox fx:id="terminBox27" alignment="CENTER_LEFT" layoutY="50.0" minHeight="-Infinity" prefHeight="50.0" prefWidth="562.0">
-                                             <children>
-                                                <Label fx:id="uhrzeitL7" prefHeight="18.0" prefWidth="75.0" text="Uhrzeit:">
-                                                   <HBox.margin>
-                                                      <Insets left="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="UhrzeitStunden7" prefHeight="28.0" prefWidth="45.0" />
-                                                <Label fx:id="zeitseperator7" text=":">
-                                                   <HBox.margin>
-                                                      <Insets left="5.0" right="5.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="UhrzeitMinuten7" prefHeight="28.0" prefWidth="45.0" />
-                                                <Label fx:id="ortL7" prefHeight="18.0" prefWidth="75.0" text="Ort:">
-                                                   <HBox.margin>
-                                                      <Insets left="87.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="ortwahl7" prefHeight="28.0" prefWidth="170.0" />
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </AnchorPane>
-                                 </content>
-                              </TitledPane>
-                              <TitledPane animated="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="139.0" prefWidth="561.0" text="Termin hinzufügen">
-                                 <content>
-                                    <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="98.0" prefWidth="559.0">
-                                       <children>
-                                          <HBox fx:id="terminBox18" alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="50.0" prefWidth="560.0">
-                                             <children>
-                                                <Label fx:id="terminL8" minWidth="-Infinity" prefHeight="18.0" prefWidth="75.0" text="Termine:">
-                                                   <HBox.margin>
-                                                      <Insets left="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="terminwahl8" prefHeight="28.0" prefWidth="170.0" />
-                                                <Label fx:id="datumL8" prefHeight="18.0" prefWidth="75.0" text="Datum:">
-                                                   <HBox.margin>
-                                                      <Insets left="20.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <DatePicker fx:id="datumwahl8">
-                                                   <HBox.margin>
-                                                      <Insets />
-                                                   </HBox.margin>
-                                                </DatePicker>
-                                             </children>
-                                          </HBox>
-                                          <HBox fx:id="terminBox28" alignment="CENTER_LEFT" layoutY="50.0" minHeight="-Infinity" prefHeight="50.0" prefWidth="562.0">
-                                             <children>
-                                                <Label fx:id="uhrzeitL8" prefHeight="18.0" prefWidth="75.0" text="Uhrzeit:">
-                                                   <HBox.margin>
-                                                      <Insets left="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="UhrzeitStunden8" prefHeight="28.0" prefWidth="45.0" />
-                                                <Label fx:id="zeitseperator8" text=":">
-                                                   <HBox.margin>
-                                                      <Insets left="5.0" right="5.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="UhrzeitMinuten8" prefHeight="28.0" prefWidth="45.0" />
-                                                <Label fx:id="ortL8" prefHeight="18.0" prefWidth="75.0" text="Ort:">
-                                                   <HBox.margin>
-                                                      <Insets left="87.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="ortwahl8" prefHeight="28.0" prefWidth="170.0" />
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </AnchorPane>
-                                 </content>
-                              </TitledPane>
-                              <TitledPane animated="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="139.0" prefWidth="561.0" text="Termin hinzufügen">
-                                 <content>
-                                    <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="98.0" prefWidth="559.0">
-                                       <children>
-                                          <HBox fx:id="terminBox19" alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="50.0" prefWidth="560.0">
-                                             <children>
-                                                <Label fx:id="terminL9" minWidth="-Infinity" prefHeight="18.0" prefWidth="75.0" text="Termine:">
-                                                   <HBox.margin>
-                                                      <Insets left="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="terminwahl9" prefHeight="28.0" prefWidth="170.0" />
-                                                <Label fx:id="datumL9" prefHeight="18.0" prefWidth="75.0" text="Datum:">
-                                                   <HBox.margin>
-                                                      <Insets left="20.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <DatePicker fx:id="datumwahl9">
-                                                   <HBox.margin>
-                                                      <Insets />
-                                                   </HBox.margin>
-                                                </DatePicker>
-                                             </children>
-                                          </HBox>
-                                          <HBox fx:id="terminBox29" alignment="CENTER_LEFT" layoutY="50.0" minHeight="-Infinity" prefHeight="50.0" prefWidth="562.0">
-                                             <children>
-                                                <Label fx:id="uhrzeitL9" prefHeight="18.0" prefWidth="75.0" text="Uhrzeit:">
-                                                   <HBox.margin>
-                                                      <Insets left="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="UhrzeitStunden9" prefHeight="28.0" prefWidth="45.0" />
-                                                <Label fx:id="zeitseperator9" text=":">
-                                                   <HBox.margin>
-                                                      <Insets left="5.0" right="5.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="UhrzeitMinuten9" prefHeight="28.0" prefWidth="45.0" />
-                                                <Label fx:id="ortL9" prefHeight="18.0" prefWidth="75.0" text="Ort:">
-                                                   <HBox.margin>
-                                                      <Insets left="87.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="ortwahl9" prefHeight="28.0" prefWidth="170.0" />
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </AnchorPane>
-                                 </content>
-                              </TitledPane>
-                              <TitledPane animated="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="139.0" prefWidth="561.0" text="Termin hinzufügen">
-                                 <content>
-                                    <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="98.0" prefWidth="559.0">
-                                       <children>
-                                          <HBox fx:id="terminBox110" alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="50.0" prefWidth="560.0">
-                                             <children>
-                                                <Label fx:id="terminL10" minWidth="-Infinity" prefHeight="18.0" prefWidth="75.0" text="Termine:">
-                                                   <HBox.margin>
-                                                      <Insets left="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="terminwahl10" prefHeight="28.0" prefWidth="170.0" />
-                                                <Label fx:id="datumL10" prefHeight="18.0" prefWidth="75.0" text="Datum:">
-                                                   <HBox.margin>
-                                                      <Insets left="20.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <DatePicker fx:id="datumwahl10">
-                                                   <HBox.margin>
-                                                      <Insets />
-                                                   </HBox.margin>
-                                                </DatePicker>
-                                             </children>
-                                          </HBox>
-                                          <HBox fx:id="terminBox210" alignment="CENTER_LEFT" layoutY="50.0" minHeight="-Infinity" prefHeight="50.0" prefWidth="562.0">
-                                             <children>
-                                                <Label fx:id="uhrzeitL10" prefHeight="18.0" prefWidth="75.0" text="Uhrzeit:">
-                                                   <HBox.margin>
-                                                      <Insets left="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="UhrzeitStunden10" prefHeight="28.0" prefWidth="45.0" />
-                                                <Label fx:id="zeitseperator10" text=":">
-                                                   <HBox.margin>
-                                                      <Insets left="5.0" right="5.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="UhrzeitMinuten10" prefHeight="28.0" prefWidth="45.0" />
-                                                <Label fx:id="ortL10" prefHeight="18.0" prefWidth="75.0" text="Ort:">
-                                                   <HBox.margin>
-                                                      <Insets left="87.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="ortwahl10" prefHeight="28.0" prefWidth="170.0" />
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </AnchorPane>
-                                 </content>
-                              </TitledPane>
-                              <TitledPane animated="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="139.0" prefWidth="561.0" text="Termin hinzufügen">
-                                 <content>
-                                    <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="98.0" prefWidth="559.0">
-                                       <children>
-                                          <HBox fx:id="terminBox111" alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="50.0" prefWidth="560.0">
-                                             <children>
-                                                <Label fx:id="terminL11" minWidth="-Infinity" prefHeight="18.0" prefWidth="75.0" text="Termine:">
-                                                   <HBox.margin>
-                                                      <Insets left="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="terminwahl11" prefHeight="28.0" prefWidth="170.0" />
-                                                <Label fx:id="datumL11" prefHeight="18.0" prefWidth="75.0" text="Datum:">
-                                                   <HBox.margin>
-                                                      <Insets left="20.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <DatePicker fx:id="datumwahl11">
-                                                   <HBox.margin>
-                                                      <Insets />
-                                                   </HBox.margin>
-                                                </DatePicker>
-                                             </children>
-                                          </HBox>
-                                          <HBox fx:id="terminBox211" alignment="CENTER_LEFT" layoutY="50.0" minHeight="-Infinity" prefHeight="50.0" prefWidth="562.0">
-                                             <children>
-                                                <Label fx:id="uhrzeitL11" prefHeight="18.0" prefWidth="75.0" text="Uhrzeit:">
-                                                   <HBox.margin>
-                                                      <Insets left="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="UhrzeitStunden11" prefHeight="28.0" prefWidth="45.0" />
-                                                <Label fx:id="zeitseperator11" text=":">
-                                                   <HBox.margin>
-                                                      <Insets left="5.0" right="5.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="UhrzeitMinuten11" prefHeight="28.0" prefWidth="45.0" />
-                                                <Label fx:id="ortL11" prefHeight="18.0" prefWidth="75.0" text="Ort:">
-                                                   <HBox.margin>
-                                                      <Insets left="87.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="ortwahl11" prefHeight="28.0" prefWidth="170.0" />
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </AnchorPane>
-                                 </content>
-                              </TitledPane>
-                              <TitledPane animated="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="139.0" prefWidth="561.0" text="Termin hinzufügen">
-                                 <content>
-                                    <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="98.0" prefWidth="559.0">
-                                       <children>
-                                          <HBox fx:id="terminBox112" alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="50.0" prefWidth="560.0">
-                                             <children>
-                                                <Label fx:id="terminL12" minWidth="-Infinity" prefHeight="18.0" prefWidth="75.0" text="Termine:">
-                                                   <HBox.margin>
-                                                      <Insets left="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="terminwahl12" prefHeight="28.0" prefWidth="170.0" />
-                                                <Label fx:id="datumL12" prefHeight="18.0" prefWidth="75.0" text="Datum:">
-                                                   <HBox.margin>
-                                                      <Insets left="20.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <DatePicker fx:id="datumwahl12">
-                                                   <HBox.margin>
-                                                      <Insets />
-                                                   </HBox.margin>
-                                                </DatePicker>
-                                             </children>
-                                          </HBox>
-                                          <HBox fx:id="terminBox212" alignment="CENTER_LEFT" layoutY="50.0" minHeight="-Infinity" prefHeight="50.0" prefWidth="562.0">
-                                             <children>
-                                                <Label fx:id="uhrzeitL12" prefHeight="18.0" prefWidth="75.0" text="Uhrzeit:">
-                                                   <HBox.margin>
-                                                      <Insets left="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="UhrzeitStunden12" prefHeight="28.0" prefWidth="45.0" />
-                                                <Label fx:id="zeitseperator12" text=":">
-                                                   <HBox.margin>
-                                                      <Insets left="5.0" right="5.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="UhrzeitMinuten12" prefHeight="28.0" prefWidth="45.0" />
-                                                <Label fx:id="ortL12" prefHeight="18.0" prefWidth="75.0" text="Ort:">
-                                                   <HBox.margin>
-                                                      <Insets left="87.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="ortwahl12" prefHeight="28.0" prefWidth="170.0" />
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </AnchorPane>
-                                 </content>
-                              </TitledPane>
-                              <TitledPane animated="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="139.0" prefWidth="561.0" text="Termin hinzufügen">
-                                 <content>
-                                    <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="98.0" prefWidth="559.0">
-                                       <children>
-                                          <HBox fx:id="terminBox113" alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="50.0" prefWidth="560.0">
-                                             <children>
-                                                <Label fx:id="terminL13" minWidth="-Infinity" prefHeight="18.0" prefWidth="75.0" text="Termine:">
-                                                   <HBox.margin>
-                                                      <Insets left="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="terminwahl13" prefHeight="28.0" prefWidth="170.0" />
-                                                <Label fx:id="datumL13" prefHeight="18.0" prefWidth="75.0" text="Datum:">
-                                                   <HBox.margin>
-                                                      <Insets left="20.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <DatePicker fx:id="datumwahl13">
-                                                   <HBox.margin>
-                                                      <Insets />
-                                                   </HBox.margin>
-                                                </DatePicker>
-                                             </children>
-                                          </HBox>
-                                          <HBox fx:id="terminBox213" alignment="CENTER_LEFT" layoutY="50.0" minHeight="-Infinity" prefHeight="50.0" prefWidth="562.0">
-                                             <children>
-                                                <Label fx:id="uhrzeitL13" prefHeight="18.0" prefWidth="75.0" text="Uhrzeit:">
-                                                   <HBox.margin>
-                                                      <Insets left="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="UhrzeitStunden13" prefHeight="28.0" prefWidth="45.0" />
-                                                <Label fx:id="zeitseperator13" text=":">
-                                                   <HBox.margin>
-                                                      <Insets left="5.0" right="5.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="UhrzeitMinuten13" prefHeight="28.0" prefWidth="45.0" />
-                                                <Label fx:id="ortL13" prefHeight="18.0" prefWidth="75.0" text="Ort:">
-                                                   <HBox.margin>
-                                                      <Insets left="87.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="ortwahl13" prefHeight="28.0" prefWidth="170.0" />
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </AnchorPane>
-                                 </content>
-                              </TitledPane>
-                              <TitledPane animated="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="139.0" prefWidth="561.0" text="Termin hinzufügen">
-                                 <content>
-                                    <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="98.0" prefWidth="559.0">
-                                       <children>
-                                          <HBox fx:id="terminBox114" alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="50.0" prefWidth="560.0">
-                                             <children>
-                                                <Label fx:id="terminL14" minWidth="-Infinity" prefHeight="18.0" prefWidth="75.0" text="Termine:">
-                                                   <HBox.margin>
-                                                      <Insets left="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="terminwahl14" prefHeight="28.0" prefWidth="170.0" />
-                                                <Label fx:id="datumL14" prefHeight="18.0" prefWidth="75.0" text="Datum:">
-                                                   <HBox.margin>
-                                                      <Insets left="20.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <DatePicker fx:id="datumwahl14">
-                                                   <HBox.margin>
-                                                      <Insets />
-                                                   </HBox.margin>
-                                                </DatePicker>
-                                             </children>
-                                          </HBox>
-                                          <HBox fx:id="terminBox214" alignment="CENTER_LEFT" layoutY="50.0" minHeight="-Infinity" prefHeight="50.0" prefWidth="562.0">
-                                             <children>
-                                                <Label fx:id="uhrzeitL14" prefHeight="18.0" prefWidth="75.0" text="Uhrzeit:">
-                                                   <HBox.margin>
-                                                      <Insets left="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="UhrzeitStunden14" prefHeight="28.0" prefWidth="45.0" />
-                                                <Label fx:id="zeitseperator14" text=":">
-                                                   <HBox.margin>
-                                                      <Insets left="5.0" right="5.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="UhrzeitMinuten14" prefHeight="28.0" prefWidth="45.0" />
-                                                <Label fx:id="ortL14" prefHeight="18.0" prefWidth="75.0" text="Ort:">
-                                                   <HBox.margin>
-                                                      <Insets left="87.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <ChoiceBox fx:id="ortwahl14" prefHeight="28.0" prefWidth="170.0" />
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </AnchorPane>
-                                 </content>
-                              </TitledPane>
-                          </panes>
-                        </Accordion>
-                        <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="56.0" prefWidth="561.0" spacing="10.0">
-                           <children>
-                              <Button fx:id="speichern" mnemonicParsing="false" onAction="#onActionSave" text="Speichern" />
-                              <Button fx:id="change" mnemonicParsing="false" onAction="#onActionChange" text="Bearbeiten" />
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-               </children>
-            </AnchorPane>
-         </content>
-         <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </padding>
-      </ScrollPane>
-   </children>
+<AnchorPane id="AnchorPane" fx:id="patients" prefHeight="400.0"
+	prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.controllers.PatientsController">
+	<children>
+		<ScrollPane prefHeight="400.0" prefWidth="600.0"
+			AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+			AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+			<content>
+				<AnchorPane minHeight="-Infinity" prefHeight="1000.0"
+					prefWidth="561.0">
+					<children>
+						<VBox minHeight="-Infinity" prefHeight="525.0" prefWidth="561.0">
+							<children>
+								<Label fx:id="PatientendatenL" style="-fx-font-size: 15; -fx-font-weight: bold;"
+									text="Patientendaten" />
+								<HBox alignment="CENTER_LEFT" minHeight="-Infinity"
+									prefHeight="70.0" prefWidth="200.0">
+									<children>
+										<Label fx:id="patientL" minWidth="-Infinity" prefHeight="18.0"
+											prefWidth="75.0" text="Patient/in:" />
+										<ChoiceBox fx:id="patientenwahl" prefHeight="28.0"
+											prefWidth="170.0">
+											<HBox.margin>
+												<Insets right="20.0" />
+											</HBox.margin>
+										</ChoiceBox>
+										<VBox prefHeight="50.0" prefWidth="272.0">
+											<children>
+												<HBox prefHeight="100.0" prefWidth="200.0">
+													<children>
+														<Label fx:id="benutzerL" prefHeight="18.0"
+															prefWidth="100.0" text="Benutzername:" />
+														<TextField fx:id="benutzerText" />
+													</children>
+												</HBox>
+												<HBox prefHeight="100.0" prefWidth="200.0">
+													<children>
+														<Label fx:id="passwortL" prefHeight="18.0"
+															prefWidth="100.0" text="Passwort:" />
+														<TextField fx:id="passwortText" />
+													</children>
+												</HBox>
+											</children>
+										</VBox>
+									</children>
+									<VBox.margin>
+										<Insets left="10.0" />
+									</VBox.margin>
+								</HBox>
+								<Separator prefWidth="200.0" />
+								<Label fx:id="KontakteL" style="-fx-font-size: 15; -fx-font-weight: bold;"
+									text="Kontakte">
+									<VBox.margin>
+										<Insets top="10.0" />
+									</VBox.margin>
+								</Label>
+								<HBox alignment="CENTER_LEFT" minHeight="-Infinity"
+									prefHeight="50.0" prefWidth="200.0">
+									<children>
+										<Label fx:id="hausarztL" minWidth="-Infinity"
+											prefHeight="18.0" prefWidth="75.0" text="Hausarzt:" />
+										<ChoiceBox fx:id="hausarztwahl" prefHeight="28.0"
+											prefWidth="170.0" />
+										<Label fx:id="spitalL" minWidth="-Infinity" prefHeight="18.0"
+											prefWidth="75.0" text="Spital:">
+											<HBox.margin>
+												<Insets left="20.0" />
+											</HBox.margin>
+										</Label>
+										<ChoiceBox fx:id="spitalwahl" prefHeight="28.0"
+											prefWidth="170.0" />
+									</children>
+									<VBox.margin>
+										<Insets left="10.0" />
+									</VBox.margin>
+								</HBox>
+								<HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0">
+									<children>
+										<Label fx:id="spezialistL" minWidth="-Infinity"
+											prefHeight="18.0" prefWidth="75.0" text="Spezialist:" />
+										<ChoiceBox fx:id="spezialistwahl" prefHeight="28.0"
+											prefWidth="170.0" />
+										<Label fx:id="apothekeL" minWidth="-Infinity"
+											prefHeight="18.0" prefWidth="75.0" text="Apotheke:">
+											<HBox.margin>
+												<Insets left="20.0" />
+											</HBox.margin>
+										</Label>
+										<ChoiceBox fx:id="apothekenwahl" prefHeight="28.0"
+											prefWidth="170.0" />
+									</children>
+									<VBox.margin>
+										<Insets left="10.0" />
+									</VBox.margin>
+								</HBox>
+								<HBox alignment="CENTER_LEFT" minHeight="-Infinity"
+									prefHeight="50.0" prefWidth="200.0">
+									<children>
+										<Label fx:id="rehaL" minWidth="-Infinity" prefHeight="18.0"
+											prefWidth="75.0" text="Reha:" />
+										<ChoiceBox fx:id="rehawahl" prefHeight="28.0"
+											prefWidth="170.0" />
+									</children>
+									<VBox.margin>
+										<Insets left="10.0" />
+									</VBox.margin>
+								</HBox>
+								<Separator prefWidth="200.0" />
+								<Label fx:id="AblaufL" style="-fx-font-size: 15; -fx-font-weight: bold;"
+									text="Ablauf">
+									<VBox.margin>
+										<Insets top="10.0" />
+									</VBox.margin>
+								</Label>
+								<HBox fx:id="terminBox1" alignment="CENTER_LEFT" minHeight="-Infinity"
+									prefHeight="50.0" prefWidth="200.0">
+									<children>
+										<Label fx:id="terminL" minWidth="-Infinity" prefHeight="18.0"
+											prefWidth="75.0" text="Termine:" />
+										<ChoiceBox fx:id="terminwahl" prefHeight="28.0"
+											prefWidth="170.0" />
+										<Label fx:id="datumL" prefHeight="18.0" prefWidth="75.0"
+											text="Datum:">
+											<HBox.margin>
+												<Insets left="20.0" />
+											</HBox.margin>
+										</Label>
+										<DatePicker fx:id="datumwahl">
+											<HBox.margin>
+												<Insets />
+											</HBox.margin>
+										</DatePicker>
+									</children>
+									<VBox.margin>
+										<Insets left="10.0" />
+									</VBox.margin>
+								</HBox>
+								<HBox fx:id="terminBox2" alignment="CENTER_LEFT" minHeight="-Infinity"
+									prefHeight="50.0" prefWidth="200.0">
+									<children>
+										<Label fx:id="uhrzeitL" prefHeight="18.0" prefWidth="75.0"
+											text="Uhrzeit:">
+											<HBox.margin>
+												<Insets left="10.0" />
+											</HBox.margin>
+										</Label>
+										<ChoiceBox fx:id="UhrzeitStunden" prefHeight="28.0"
+											prefWidth="45.0" />
+										<Label fx:id="zeitseperator" text=":">
+											<HBox.margin>
+												<Insets left="5.0" right="5.0" />
+											</HBox.margin>
+										</Label>
+										<ChoiceBox fx:id="UhrzeitMinuten" prefHeight="28.0"
+											prefWidth="45.0" />
+										<Label fx:id="ortL" prefHeight="18.0" prefWidth="30.0"
+											text="Ort:">
+											<HBox.margin>
+												<Insets left="30.0" />
+											</HBox.margin>
+										</Label>
+										<ChoiceBox fx:id="ortwahl" prefHeight="28.0"
+											prefWidth="170.0" />
+										<Separator orientation="VERTICAL" prefHeight="200.0">
+											<HBox.margin>
+												<Insets left="5.0" right="5.0" />
+											</HBox.margin>
+										</Separator>
+										<ComboBox fx:id="statusBox" minWidth="-Infinity"
+											prefWidth="100.0" promptText="Status">
+											<HBox.margin>
+												<Insets />
+											</HBox.margin>
+										</ComboBox>
+									</children>
+								</HBox>
+								<Separator prefWidth="200.0" />
+								<Accordion prefHeight="207.0" prefWidth="561.0">
+									<panes>
+										<TitledPane animated="false" maxHeight="-Infinity"
+											minHeight="-Infinity" prefHeight="100.0" prefWidth="561.0"
+											text="Termin hinzufügen">
+											<content>
+												<AnchorPane maxHeight="-Infinity" minHeight="99.0"
+													minWidth="0.0" prefHeight="99.0" prefWidth="559.0">
+													<children>
+														<HBox fx:id="terminBox11" alignment="CENTER_LEFT"
+															minHeight="-Infinity" prefHeight="50.0" prefWidth="560.0">
+															<children>
+																<Label fx:id="terminL1" minWidth="-Infinity"
+																	prefHeight="18.0" prefWidth="75.0" text="Termine:">
+																	<HBox.margin>
+																		<Insets left="10.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="terminwahl1" prefHeight="28.0"
+																	prefWidth="170.0" />
+																<Label fx:id="datumL1" prefHeight="18.0"
+																	prefWidth="75.0" text="Datum:">
+																	<HBox.margin>
+																		<Insets left="20.0" />
+																	</HBox.margin>
+																</Label>
+																<DatePicker fx:id="datumwahl1">
+																	<HBox.margin>
+																		<Insets />
+																	</HBox.margin>
+																</DatePicker>
+															</children>
+														</HBox>
+														<HBox fx:id="terminBox21" alignment="CENTER_LEFT"
+															layoutY="50.0" minHeight="-Infinity" prefHeight="50.0"
+															prefWidth="562.0">
+															<children>
+																<Label fx:id="uhrzeitL1" prefHeight="18.0"
+																	prefWidth="75.0" text="Uhrzeit:">
+																	<HBox.margin>
+																		<Insets left="10.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="UhrzeitStunden1" prefHeight="28.0"
+																	prefWidth="45.0" />
+																<Label fx:id="zeitseperator1" text=":">
+																	<HBox.margin>
+																		<Insets left="5.0" right="5.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="UhrzeitMinuten1" prefHeight="28.0"
+																	prefWidth="45.0" />
+																<Label fx:id="ortL1" prefHeight="18.0" prefWidth="30.0"
+																	text="Ort:">
+																	<HBox.margin>
+																		<Insets left="30.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="ortwahl1" prefHeight="28.0"
+																	prefWidth="170.0" />
+																<Separator orientation="VERTICAL" prefHeight="200.0">
+																	<HBox.margin>
+																		<Insets left="5.0" right="5.0" />
+																	</HBox.margin>
+																</Separator>
+																<ComboBox fx:id="statusBox1" minWidth="-Infinity"
+																	prefWidth="100.0" promptText="Status">
+																	<HBox.margin>
+																		<Insets />
+																	</HBox.margin>
+																</ComboBox>
+															</children>
+														</HBox>
+													</children>
+												</AnchorPane>
+											</content>
+										</TitledPane>
+										<TitledPane animated="false" maxHeight="-Infinity"
+											minHeight="-Infinity" prefHeight="100.0" prefWidth="561.0"
+											text="Termin hinzufügen">
+											<content>
+												<AnchorPane maxHeight="-Infinity" minHeight="0.0"
+													minWidth="0.0" prefHeight="98.0" prefWidth="559.0">
+													<children>
+														<HBox fx:id="terminBox12" alignment="CENTER_LEFT"
+															minHeight="-Infinity" prefHeight="50.0" prefWidth="560.0">
+															<children>
+																<Label fx:id="terminL2" minWidth="-Infinity"
+																	prefHeight="18.0" prefWidth="75.0" text="Termine:">
+																	<HBox.margin>
+																		<Insets left="10.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="terminwahl2" prefHeight="28.0"
+																	prefWidth="170.0" />
+																<Label fx:id="datumL2" prefHeight="18.0"
+																	prefWidth="75.0" text="Datum:">
+																	<HBox.margin>
+																		<Insets left="20.0" />
+																	</HBox.margin>
+																</Label>
+																<DatePicker fx:id="datumwahl2">
+																	<HBox.margin>
+																		<Insets />
+																	</HBox.margin>
+																</DatePicker>
+															</children>
+														</HBox>
+														<HBox fx:id="terminBox22" alignment="CENTER_LEFT"
+															layoutY="50.0" minHeight="-Infinity" prefHeight="50.0"
+															prefWidth="562.0">
+															<children>
+																<Label fx:id="uhrzeitL2" prefHeight="18.0"
+																	prefWidth="75.0" text="Uhrzeit:">
+																	<HBox.margin>
+																		<Insets left="10.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="UhrzeitStunden2" prefHeight="28.0"
+																	prefWidth="45.0" />
+																<Label fx:id="zeitseperator2" text=":">
+																	<HBox.margin>
+																		<Insets left="5.0" right="5.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="UhrzeitMinuten2" prefHeight="28.0"
+																	prefWidth="45.0" />
+																<Label fx:id="ortL2" prefHeight="18.0" prefWidth="30.0"
+																	text="Ort:">
+																	<HBox.margin>
+																		<Insets left="30.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="ortwahl2" prefHeight="28.0"
+																	prefWidth="170.0" />
+																<Separator orientation="VERTICAL" prefHeight="200.0">
+																	<HBox.margin>
+																		<Insets left="5.0" right="5.0" />
+																	</HBox.margin>
+																</Separator>
+																<ComboBox fx:id="statusBox2" minWidth="-Infinity"
+																	prefWidth="100.0" promptText="Status">
+																	<HBox.margin>
+																		<Insets />
+																	</HBox.margin>
+																</ComboBox>
+															</children>
+														</HBox>
+													</children>
+												</AnchorPane>
+											</content>
+										</TitledPane>
+										<TitledPane animated="false" maxHeight="-Infinity"
+											minHeight="-Infinity" prefHeight="139.0" prefWidth="561.0"
+											text="Termin hinzufügen">
+											<content>
+												<AnchorPane maxHeight="-Infinity" minHeight="0.0"
+													minWidth="0.0" prefHeight="98.0" prefWidth="559.0">
+													<children>
+														<HBox fx:id="terminBox13" alignment="CENTER_LEFT"
+															minHeight="-Infinity" prefHeight="50.0" prefWidth="560.0">
+															<children>
+																<Label fx:id="terminL3" minWidth="-Infinity"
+																	prefHeight="18.0" prefWidth="75.0" text="Termine:">
+																	<HBox.margin>
+																		<Insets left="10.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="terminwahl3" prefHeight="28.0"
+																	prefWidth="170.0" />
+																<Label fx:id="datumL3" prefHeight="18.0"
+																	prefWidth="75.0" text="Datum:">
+																	<HBox.margin>
+																		<Insets left="20.0" />
+																	</HBox.margin>
+																</Label>
+																<DatePicker fx:id="datumwahl3">
+																	<HBox.margin>
+																		<Insets />
+																	</HBox.margin>
+																</DatePicker>
+															</children>
+														</HBox>
+														<HBox fx:id="terminBox23" alignment="CENTER_LEFT"
+															layoutY="50.0" minHeight="-Infinity" prefHeight="50.0"
+															prefWidth="562.0">
+															<children>
+																<Label fx:id="uhrzeitL3" prefHeight="18.0"
+																	prefWidth="75.0" text="Uhrzeit:">
+																	<HBox.margin>
+																		<Insets left="10.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="UhrzeitStunden3" prefHeight="28.0"
+																	prefWidth="45.0" />
+																<Label fx:id="zeitseperator3" text=":">
+																	<HBox.margin>
+																		<Insets left="5.0" right="5.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="UhrzeitMinuten3" prefHeight="28.0"
+																	prefWidth="45.0" />
+																<Label fx:id="ortL3" prefHeight="18.0" prefWidth="30.0"
+																	text="Ort:">
+																	<HBox.margin>
+																		<Insets left="30.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="ortwahl3" prefHeight="28.0"
+																	prefWidth="170.0" />
+																<Separator orientation="VERTICAL" prefHeight="200.0">
+																	<HBox.margin>
+																		<Insets left="5.0" right="5.0" />
+																	</HBox.margin>
+																</Separator>
+																<ComboBox fx:id="statusBox3" minWidth="-Infinity"
+																	prefWidth="100.0" promptText="Status">
+																	<HBox.margin>
+																		<Insets />
+																	</HBox.margin>
+																</ComboBox>
+															</children>
+														</HBox>
+													</children>
+												</AnchorPane>
+											</content>
+										</TitledPane>
+										<TitledPane animated="false" maxHeight="-Infinity"
+											minHeight="-Infinity" prefHeight="139.0" prefWidth="561.0"
+											text="Termin hinzufügen">
+											<content>
+												<AnchorPane maxHeight="-Infinity" minHeight="0.0"
+													minWidth="0.0" prefHeight="98.0" prefWidth="559.0">
+													<children>
+														<HBox fx:id="terminBox14" alignment="CENTER_LEFT"
+															minHeight="-Infinity" prefHeight="50.0" prefWidth="560.0">
+															<children>
+																<Label fx:id="terminL4" minWidth="-Infinity"
+																	prefHeight="18.0" prefWidth="75.0" text="Termine:">
+																	<HBox.margin>
+																		<Insets left="10.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="terminwahl4" prefHeight="28.0"
+																	prefWidth="170.0" />
+																<Label fx:id="datumL4" prefHeight="18.0"
+																	prefWidth="75.0" text="Datum:">
+																	<HBox.margin>
+																		<Insets left="20.0" />
+																	</HBox.margin>
+																</Label>
+																<DatePicker fx:id="datumwahl4">
+																	<HBox.margin>
+																		<Insets />
+																	</HBox.margin>
+																</DatePicker>
+															</children>
+														</HBox>
+														<HBox fx:id="terminBox24" alignment="CENTER_LEFT"
+															layoutY="50.0" minHeight="-Infinity" prefHeight="50.0"
+															prefWidth="562.0">
+															<children>
+																<Label fx:id="uhrzeitL4" prefHeight="18.0"
+																	prefWidth="75.0" text="Uhrzeit:">
+																	<HBox.margin>
+																		<Insets left="10.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="UhrzeitStunden4" prefHeight="28.0"
+																	prefWidth="45.0" />
+																<Label fx:id="zeitseperator4" text=":">
+																	<HBox.margin>
+																		<Insets left="5.0" right="5.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="UhrzeitMinuten4" prefHeight="28.0"
+																	prefWidth="45.0" />
+																<Label fx:id="ortL4" prefHeight="18.0" prefWidth="30.0"
+																	text="Ort:">
+																	<HBox.margin>
+																		<Insets left="30.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="ortwahl4" prefHeight="28.0"
+																	prefWidth="170.0" />
+																<Separator orientation="VERTICAL" prefHeight="200.0">
+																	<HBox.margin>
+																		<Insets left="5.0" right="5.0" />
+																	</HBox.margin>
+																</Separator>
+																<ComboBox fx:id="statusBox4" minWidth="-Infinity"
+																	prefWidth="100.0" promptText="Status">
+																	<HBox.margin>
+																		<Insets />
+																	</HBox.margin>
+																</ComboBox>
+															</children>
+														</HBox>
+													</children>
+												</AnchorPane>
+											</content>
+										</TitledPane>
+										<TitledPane animated="false" maxHeight="-Infinity"
+											minHeight="-Infinity" prefHeight="139.0" prefWidth="561.0"
+											text="Termin hinzufügen">
+											<content>
+												<AnchorPane maxHeight="-Infinity" minHeight="0.0"
+													minWidth="0.0" prefHeight="98.0" prefWidth="559.0">
+													<children>
+														<HBox fx:id="terminBox15" alignment="CENTER_LEFT"
+															minHeight="-Infinity" prefHeight="50.0" prefWidth="560.0">
+															<children>
+																<Label fx:id="terminL5" minWidth="-Infinity"
+																	prefHeight="18.0" prefWidth="75.0" text="Termine:">
+																	<HBox.margin>
+																		<Insets left="10.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="terminwahl5" prefHeight="28.0"
+																	prefWidth="170.0" />
+																<Label fx:id="datumL5" prefHeight="18.0"
+																	prefWidth="75.0" text="Datum:">
+																	<HBox.margin>
+																		<Insets left="20.0" />
+																	</HBox.margin>
+																</Label>
+																<DatePicker fx:id="datumwahl5">
+																	<HBox.margin>
+																		<Insets />
+																	</HBox.margin>
+																</DatePicker>
+															</children>
+														</HBox>
+														<HBox fx:id="terminBox25" alignment="CENTER_LEFT"
+															layoutY="50.0" minHeight="-Infinity" prefHeight="50.0"
+															prefWidth="562.0">
+															<children>
+																<Label fx:id="uhrzeitL5" prefHeight="18.0"
+																	prefWidth="75.0" text="Uhrzeit:">
+																	<HBox.margin>
+																		<Insets left="10.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="UhrzeitStunden5" prefHeight="28.0"
+																	prefWidth="45.0" />
+																<Label fx:id="zeitseperator5" text=":">
+																	<HBox.margin>
+																		<Insets left="5.0" right="5.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="UhrzeitMinuten5" prefHeight="28.0"
+																	prefWidth="45.0" />
+																<Label fx:id="ortL5" prefHeight="18.0" prefWidth="30.0"
+																	text="Ort:">
+																	<HBox.margin>
+																		<Insets left="30.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="ortwahl5" prefHeight="28.0"
+																	prefWidth="170.0" />
+																<Separator orientation="VERTICAL" prefHeight="200.0">
+																	<HBox.margin>
+																		<Insets left="5.0" right="5.0" />
+																	</HBox.margin>
+																</Separator>
+																<ComboBox fx:id="statusBox5" minWidth="-Infinity"
+																	prefWidth="100.0" promptText="Status">
+																	<HBox.margin>
+																		<Insets />
+																	</HBox.margin>
+																</ComboBox>
+															</children>
+														</HBox>
+													</children>
+												</AnchorPane>
+											</content>
+										</TitledPane>
+										<TitledPane animated="false" maxHeight="-Infinity"
+											minHeight="-Infinity" prefHeight="139.0" prefWidth="561.0"
+											text="Termin hinzufügen">
+											<content>
+												<AnchorPane maxHeight="-Infinity" minHeight="0.0"
+													minWidth="0.0" prefHeight="98.0" prefWidth="559.0">
+													<children>
+														<HBox fx:id="terminBox16" alignment="CENTER_LEFT"
+															minHeight="-Infinity" prefHeight="50.0" prefWidth="560.0">
+															<children>
+																<Label fx:id="terminL6" minWidth="-Infinity"
+																	prefHeight="18.0" prefWidth="75.0" text="Termine:">
+																	<HBox.margin>
+																		<Insets left="10.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="terminwahl6" prefHeight="28.0"
+																	prefWidth="170.0" />
+																<Label fx:id="datumL6" prefHeight="18.0"
+																	prefWidth="75.0" text="Datum:">
+																	<HBox.margin>
+																		<Insets left="20.0" />
+																	</HBox.margin>
+																</Label>
+																<DatePicker fx:id="datumwahl6">
+																	<HBox.margin>
+																		<Insets />
+																	</HBox.margin>
+																</DatePicker>
+															</children>
+														</HBox>
+														<HBox fx:id="terminBox26" alignment="CENTER_LEFT"
+															layoutY="50.0" minHeight="-Infinity" prefHeight="50.0"
+															prefWidth="562.0">
+															<children>
+																<Label fx:id="uhrzeitL6" prefHeight="18.0"
+																	prefWidth="75.0" text="Uhrzeit:">
+																	<HBox.margin>
+																		<Insets left="10.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="UhrzeitStunden6" prefHeight="28.0"
+																	prefWidth="45.0" />
+																<Label fx:id="zeitseperator6" text=":">
+																	<HBox.margin>
+																		<Insets left="5.0" right="5.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="UhrzeitMinuten6" prefHeight="28.0"
+																	prefWidth="45.0" />
+																<Label fx:id="ortL6" prefHeight="18.0" prefWidth="30.0"
+																	text="Ort:">
+																	<HBox.margin>
+																		<Insets left="30.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="ortwahl6" prefHeight="28.0"
+																	prefWidth="170.0" />
+																<Separator orientation="VERTICAL" prefHeight="200.0">
+																	<HBox.margin>
+																		<Insets left="5.0" right="5.0" />
+																	</HBox.margin>
+																</Separator>
+																<ComboBox fx:id="statusBox6" minWidth="-Infinity"
+																	prefWidth="100.0" promptText="Status">
+																	<HBox.margin>
+																		<Insets />
+																	</HBox.margin>
+																</ComboBox>
+															</children>
+														</HBox>
+													</children>
+												</AnchorPane>
+											</content>
+										</TitledPane>
+										<TitledPane animated="false" maxHeight="-Infinity"
+											minHeight="-Infinity" prefHeight="139.0" prefWidth="561.0"
+											text="Termin hinzufügen">
+											<content>
+												<AnchorPane maxHeight="-Infinity" minHeight="0.0"
+													minWidth="0.0" prefHeight="98.0" prefWidth="559.0">
+													<children>
+														<HBox fx:id="terminBox17" alignment="CENTER_LEFT"
+															minHeight="-Infinity" prefHeight="50.0" prefWidth="560.0">
+															<children>
+																<Label fx:id="terminL7" minWidth="-Infinity"
+																	prefHeight="18.0" prefWidth="75.0" text="Termine:">
+																	<HBox.margin>
+																		<Insets left="10.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="terminwahl7" prefHeight="28.0"
+																	prefWidth="170.0" />
+																<Label fx:id="datumL7" prefHeight="18.0"
+																	prefWidth="75.0" text="Datum:">
+																	<HBox.margin>
+																		<Insets left="20.0" />
+																	</HBox.margin>
+																</Label>
+																<DatePicker fx:id="datumwahl7">
+																	<HBox.margin>
+																		<Insets />
+																	</HBox.margin>
+																</DatePicker>
+															</children>
+														</HBox>
+														<HBox fx:id="terminBox27" alignment="CENTER_LEFT"
+															layoutY="50.0" minHeight="-Infinity" prefHeight="50.0"
+															prefWidth="562.0">
+															<children>
+																<Label fx:id="uhrzeitL7" prefHeight="18.0"
+																	prefWidth="75.0" text="Uhrzeit:">
+																	<HBox.margin>
+																		<Insets left="10.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="UhrzeitStunden7" prefHeight="28.0"
+																	prefWidth="45.0" />
+																<Label fx:id="zeitseperator7" text=":">
+																	<HBox.margin>
+																		<Insets left="5.0" right="5.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="UhrzeitMinuten7" prefHeight="28.0"
+																	prefWidth="45.0" />
+																<Label fx:id="ortL7" prefHeight="18.0" prefWidth="30.0"
+																	text="Ort:">
+																	<HBox.margin>
+																		<Insets left="30.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="ortwahl7" prefHeight="28.0"
+																	prefWidth="170.0" />
+																<Separator orientation="VERTICAL" prefHeight="200.0">
+																	<HBox.margin>
+																		<Insets left="5.0" right="5.0" />
+																	</HBox.margin>
+																</Separator>
+																<ComboBox fx:id="statusBox7" minWidth="-Infinity"
+																	prefWidth="100.0" promptText="Status">
+																	<HBox.margin>
+																		<Insets />
+																	</HBox.margin>
+																</ComboBox>
+															</children>
+														</HBox>
+													</children>
+												</AnchorPane>
+											</content>
+										</TitledPane>
+										<TitledPane animated="false" maxHeight="-Infinity"
+											minHeight="-Infinity" prefHeight="139.0" prefWidth="561.0"
+											text="Termin hinzufügen">
+											<content>
+												<AnchorPane maxHeight="-Infinity" minHeight="0.0"
+													minWidth="0.0" prefHeight="98.0" prefWidth="559.0">
+													<children>
+														<HBox fx:id="terminBox18" alignment="CENTER_LEFT"
+															minHeight="-Infinity" prefHeight="50.0" prefWidth="560.0">
+															<children>
+																<Label fx:id="terminL8" minWidth="-Infinity"
+																	prefHeight="18.0" prefWidth="75.0" text="Termine:">
+																	<HBox.margin>
+																		<Insets left="10.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="terminwahl8" prefHeight="28.0"
+																	prefWidth="170.0" />
+																<Label fx:id="datumL8" prefHeight="18.0"
+																	prefWidth="75.0" text="Datum:">
+																	<HBox.margin>
+																		<Insets left="20.0" />
+																	</HBox.margin>
+																</Label>
+																<DatePicker fx:id="datumwahl8">
+																	<HBox.margin>
+																		<Insets />
+																	</HBox.margin>
+																</DatePicker>
+															</children>
+														</HBox>
+														<HBox fx:id="terminBox28" alignment="CENTER_LEFT"
+															layoutY="50.0" minHeight="-Infinity" prefHeight="50.0"
+															prefWidth="562.0">
+															<children>
+																<Label fx:id="uhrzeitL8" prefHeight="18.0"
+																	prefWidth="75.0" text="Uhrzeit:">
+																	<HBox.margin>
+																		<Insets left="10.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="UhrzeitStunden8" prefHeight="28.0"
+																	prefWidth="45.0" />
+																<Label fx:id="zeitseperator8" text=":">
+																	<HBox.margin>
+																		<Insets left="5.0" right="5.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="UhrzeitMinuten8" prefHeight="28.0"
+																	prefWidth="45.0" />
+																<Label fx:id="ortL8" prefHeight="18.0" prefWidth="30.0"
+																	text="Ort:">
+																	<HBox.margin>
+																		<Insets left="30.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="ortwahl8" prefHeight="28.0"
+																	prefWidth="170.0" />
+																<Separator orientation="VERTICAL" prefHeight="200.0">
+																	<HBox.margin>
+																		<Insets left="5.0" right="5.0" />
+																	</HBox.margin>
+																</Separator>
+																<ComboBox fx:id="statusBox8" minWidth="-Infinity"
+																	prefWidth="100.0" promptText="Status">
+																	<HBox.margin>
+																		<Insets />
+																	</HBox.margin>
+																</ComboBox>
+															</children>
+														</HBox>
+													</children>
+												</AnchorPane>
+											</content>
+										</TitledPane>
+										<TitledPane animated="false" maxHeight="-Infinity"
+											minHeight="-Infinity" prefHeight="139.0" prefWidth="561.0"
+											text="Termin hinzufügen">
+											<content>
+												<AnchorPane maxHeight="-Infinity" minHeight="0.0"
+													minWidth="0.0" prefHeight="98.0" prefWidth="559.0">
+													<children>
+														<HBox fx:id="terminBox19" alignment="CENTER_LEFT"
+															minHeight="-Infinity" prefHeight="50.0" prefWidth="560.0">
+															<children>
+																<Label fx:id="terminL9" minWidth="-Infinity"
+																	prefHeight="18.0" prefWidth="75.0" text="Termine:">
+																	<HBox.margin>
+																		<Insets left="10.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="terminwahl9" prefHeight="28.0"
+																	prefWidth="170.0" />
+																<Label fx:id="datumL9" prefHeight="18.0"
+																	prefWidth="75.0" text="Datum:">
+																	<HBox.margin>
+																		<Insets left="20.0" />
+																	</HBox.margin>
+																</Label>
+																<DatePicker fx:id="datumwahl9">
+																	<HBox.margin>
+																		<Insets />
+																	</HBox.margin>
+																</DatePicker>
+															</children>
+														</HBox>
+														<HBox fx:id="terminBox29" alignment="CENTER_LEFT"
+															layoutY="50.0" minHeight="-Infinity" prefHeight="50.0"
+															prefWidth="562.0">
+															<children>
+																<Label fx:id="uhrzeitL9" prefHeight="18.0"
+																	prefWidth="75.0" text="Uhrzeit:">
+																	<HBox.margin>
+																		<Insets left="10.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="UhrzeitStunden9" prefHeight="28.0"
+																	prefWidth="45.0" />
+																<Label fx:id="zeitseperator9" text=":">
+																	<HBox.margin>
+																		<Insets left="5.0" right="5.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="UhrzeitMinuten9" prefHeight="28.0"
+																	prefWidth="45.0" />
+																<Label fx:id="ortL9" prefHeight="18.0" prefWidth="30.0"
+																	text="Ort:">
+																	<HBox.margin>
+																		<Insets left="30.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="ortwahl9" prefHeight="28.0"
+																	prefWidth="170.0" />
+																<Separator orientation="VERTICAL" prefHeight="200.0">
+																	<HBox.margin>
+																		<Insets left="5.0" right="5.0" />
+																	</HBox.margin>
+																</Separator>
+																<ComboBox fx:id="statusBox9" minWidth="-Infinity"
+																	prefWidth="100.0" promptText="Status">
+																	<HBox.margin>
+																		<Insets />
+																	</HBox.margin>
+																</ComboBox>
+															</children>
+														</HBox>
+													</children>
+												</AnchorPane>
+											</content>
+										</TitledPane>
+										<TitledPane animated="false" maxHeight="-Infinity"
+											minHeight="-Infinity" prefHeight="139.0" prefWidth="561.0"
+											text="Termin hinzufügen">
+											<content>
+												<AnchorPane maxHeight="-Infinity" minHeight="0.0"
+													minWidth="0.0" prefHeight="98.0" prefWidth="559.0">
+													<children>
+														<HBox fx:id="terminBox110" alignment="CENTER_LEFT"
+															minHeight="-Infinity" prefHeight="50.0" prefWidth="560.0">
+															<children>
+																<Label fx:id="terminL10" minWidth="-Infinity"
+																	prefHeight="18.0" prefWidth="75.0" text="Termine:">
+																	<HBox.margin>
+																		<Insets left="10.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="terminwahl10" prefHeight="28.0"
+																	prefWidth="170.0" />
+																<Label fx:id="datumL10" prefHeight="18.0"
+																	prefWidth="75.0" text="Datum:">
+																	<HBox.margin>
+																		<Insets left="20.0" />
+																	</HBox.margin>
+																</Label>
+																<DatePicker fx:id="datumwahl10">
+																	<HBox.margin>
+																		<Insets />
+																	</HBox.margin>
+																</DatePicker>
+															</children>
+														</HBox>
+														<HBox fx:id="terminBox210" alignment="CENTER_LEFT"
+															layoutY="50.0" minHeight="-Infinity" prefHeight="50.0"
+															prefWidth="562.0">
+															<children>
+																<Label fx:id="uhrzeitL10" prefHeight="18.0"
+																	prefWidth="75.0" text="Uhrzeit:">
+																	<HBox.margin>
+																		<Insets left="10.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="UhrzeitStunden10"
+																	prefHeight="28.0" prefWidth="45.0" />
+																<Label fx:id="zeitseperator10" text=":">
+																	<HBox.margin>
+																		<Insets left="5.0" right="5.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="UhrzeitMinuten10"
+																	prefHeight="28.0" prefWidth="45.0" />
+																<Label fx:id="ortL10" prefHeight="18.0" prefWidth="30.0"
+																	text="Ort:">
+																	<HBox.margin>
+																		<Insets left="30.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="ortwahl10" prefHeight="28.0"
+																	prefWidth="170.0" />
+																<Separator orientation="VERTICAL" prefHeight="200.0">
+																	<HBox.margin>
+																		<Insets left="5.0" right="5.0" />
+																	</HBox.margin>
+																</Separator>
+																<ComboBox fx:id="statusBox10" minWidth="-Infinity"
+																	prefWidth="100.0" promptText="Status">
+																	<HBox.margin>
+																		<Insets />
+																	</HBox.margin>
+																</ComboBox>
+															</children>
+														</HBox>
+													</children>
+												</AnchorPane>
+											</content>
+										</TitledPane>
+										<TitledPane animated="false" maxHeight="-Infinity"
+											minHeight="-Infinity" prefHeight="139.0" prefWidth="561.0"
+											text="Termin hinzufügen">
+											<content>
+												<AnchorPane maxHeight="-Infinity" minHeight="0.0"
+													minWidth="0.0" prefHeight="98.0" prefWidth="559.0">
+													<children>
+														<HBox fx:id="terminBox111" alignment="CENTER_LEFT"
+															minHeight="-Infinity" prefHeight="50.0" prefWidth="560.0">
+															<children>
+																<Label fx:id="terminL11" minWidth="-Infinity"
+																	prefHeight="18.0" prefWidth="75.0" text="Termine:">
+																	<HBox.margin>
+																		<Insets left="10.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="terminwahl11" prefHeight="28.0"
+																	prefWidth="170.0" />
+																<Label fx:id="datumL11" prefHeight="18.0"
+																	prefWidth="75.0" text="Datum:">
+																	<HBox.margin>
+																		<Insets left="20.0" />
+																	</HBox.margin>
+																</Label>
+																<DatePicker fx:id="datumwahl11">
+																	<HBox.margin>
+																		<Insets />
+																	</HBox.margin>
+																</DatePicker>
+															</children>
+														</HBox>
+														<HBox fx:id="terminBox211" alignment="CENTER_LEFT"
+															layoutY="50.0" minHeight="-Infinity" prefHeight="50.0"
+															prefWidth="562.0">
+															<children>
+																<Label fx:id="uhrzeitL11" prefHeight="18.0"
+																	prefWidth="75.0" text="Uhrzeit:">
+																	<HBox.margin>
+																		<Insets left="10.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="UhrzeitStunden11"
+																	prefHeight="28.0" prefWidth="45.0" />
+																<Label fx:id="zeitseperator11" text=":">
+																	<HBox.margin>
+																		<Insets left="5.0" right="5.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="UhrzeitMinuten11"
+																	prefHeight="28.0" prefWidth="45.0" />
+																<Label fx:id="ortL11" prefHeight="18.0" prefWidth="30.0"
+																	text="Ort:">
+																	<HBox.margin>
+																		<Insets left="30.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="ortwahl11" prefHeight="28.0"
+																	prefWidth="170.0" />
+																<Separator orientation="VERTICAL" prefHeight="200.0">
+																	<HBox.margin>
+																		<Insets left="5.0" right="5.0" />
+																	</HBox.margin>
+																</Separator>
+																<ComboBox fx:id="statusBox11" minWidth="-Infinity"
+																	prefWidth="100.0" promptText="Status">
+																	<HBox.margin>
+																		<Insets />
+																	</HBox.margin>
+																</ComboBox>
+															</children>
+														</HBox>
+													</children>
+												</AnchorPane>
+											</content>
+										</TitledPane>
+										<TitledPane animated="false" maxHeight="-Infinity"
+											minHeight="-Infinity" prefHeight="139.0" prefWidth="561.0"
+											text="Termin hinzufügen">
+											<content>
+												<AnchorPane maxHeight="-Infinity" minHeight="0.0"
+													minWidth="0.0" prefHeight="98.0" prefWidth="559.0">
+													<children>
+														<HBox fx:id="terminBox112" alignment="CENTER_LEFT"
+															minHeight="-Infinity" prefHeight="50.0" prefWidth="560.0">
+															<children>
+																<Label fx:id="terminL12" minWidth="-Infinity"
+																	prefHeight="18.0" prefWidth="75.0" text="Termine:">
+																	<HBox.margin>
+																		<Insets left="10.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="terminwahl12" prefHeight="28.0"
+																	prefWidth="170.0" />
+																<Label fx:id="datumL12" prefHeight="18.0"
+																	prefWidth="75.0" text="Datum:">
+																	<HBox.margin>
+																		<Insets left="20.0" />
+																	</HBox.margin>
+																</Label>
+																<DatePicker fx:id="datumwahl12">
+																	<HBox.margin>
+																		<Insets />
+																	</HBox.margin>
+																</DatePicker>
+															</children>
+														</HBox>
+														<HBox fx:id="terminBox212" alignment="CENTER_LEFT"
+															layoutY="50.0" minHeight="-Infinity" prefHeight="50.0"
+															prefWidth="562.0">
+															<children>
+																<Label fx:id="uhrzeitL12" prefHeight="18.0"
+																	prefWidth="75.0" text="Uhrzeit:">
+																	<HBox.margin>
+																		<Insets left="10.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="UhrzeitStunden12"
+																	prefHeight="28.0" prefWidth="45.0" />
+																<Label fx:id="zeitseperator12" text=":">
+																	<HBox.margin>
+																		<Insets left="5.0" right="5.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="UhrzeitMinuten12"
+																	prefHeight="28.0" prefWidth="45.0" />
+																<Label fx:id="ortL12" prefHeight="18.0" prefWidth="30.0"
+																	text="Ort:">
+																	<HBox.margin>
+																		<Insets left="30.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="ortwahl12" prefHeight="28.0"
+																	prefWidth="170.0" />
+																<Separator orientation="VERTICAL" prefHeight="200.0">
+																	<HBox.margin>
+																		<Insets left="5.0" right="5.0" />
+																	</HBox.margin>
+																</Separator>
+																<ComboBox fx:id="statusBox12" minWidth="-Infinity"
+																	prefWidth="100.0" promptText="Status">
+																	<HBox.margin>
+																		<Insets />
+																	</HBox.margin>
+																</ComboBox>
+															</children>
+														</HBox>
+													</children>
+												</AnchorPane>
+											</content>
+										</TitledPane>
+										<TitledPane animated="false" maxHeight="-Infinity"
+											minHeight="-Infinity" prefHeight="139.0" prefWidth="561.0"
+											text="Termin hinzufügen">
+											<content>
+												<AnchorPane maxHeight="-Infinity" minHeight="0.0"
+													minWidth="0.0" prefHeight="98.0" prefWidth="559.0">
+													<children>
+														<HBox fx:id="terminBox113" alignment="CENTER_LEFT"
+															minHeight="-Infinity" prefHeight="50.0" prefWidth="560.0">
+															<children>
+																<Label fx:id="terminL13" minWidth="-Infinity"
+																	prefHeight="18.0" prefWidth="75.0" text="Termine:">
+																	<HBox.margin>
+																		<Insets left="10.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="terminwahl13" prefHeight="28.0"
+																	prefWidth="170.0" />
+																<Label fx:id="datumL13" prefHeight="18.0"
+																	prefWidth="75.0" text="Datum:">
+																	<HBox.margin>
+																		<Insets left="20.0" />
+																	</HBox.margin>
+																</Label>
+																<DatePicker fx:id="datumwahl13">
+																	<HBox.margin>
+																		<Insets />
+																	</HBox.margin>
+																</DatePicker>
+															</children>
+														</HBox>
+														<HBox fx:id="terminBox213" alignment="CENTER_LEFT"
+															layoutY="50.0" minHeight="-Infinity" prefHeight="50.0"
+															prefWidth="562.0">
+															<children>
+																<Label fx:id="uhrzeitL13" prefHeight="18.0"
+																	prefWidth="75.0" text="Uhrzeit:">
+																	<HBox.margin>
+																		<Insets left="10.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="UhrzeitStunden13"
+																	prefHeight="28.0" prefWidth="45.0" />
+																<Label fx:id="zeitseperator13" text=":">
+																	<HBox.margin>
+																		<Insets left="5.0" right="5.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="UhrzeitMinuten13"
+																	prefHeight="28.0" prefWidth="45.0" />
+																<Label fx:id="ortL13" prefHeight="18.0" prefWidth="30.0"
+																	text="Ort:">
+																	<HBox.margin>
+																		<Insets left="30.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="ortwahl13" prefHeight="28.0"
+																	prefWidth="170.0" />
+																<Separator orientation="VERTICAL" prefHeight="200.0">
+																	<HBox.margin>
+																		<Insets left="5.0" right="5.0" />
+																	</HBox.margin>
+																</Separator>
+																<ComboBox fx:id="statusBox13" minWidth="-Infinity"
+																	prefWidth="100.0" promptText="Status">
+																	<HBox.margin>
+																		<Insets />
+																	</HBox.margin>
+																</ComboBox>
+															</children>
+														</HBox>
+													</children>
+												</AnchorPane>
+											</content>
+										</TitledPane>
+										<TitledPane animated="false" maxHeight="-Infinity"
+											minHeight="-Infinity" prefHeight="139.0" prefWidth="561.0"
+											text="Termin hinzufügen">
+											<content>
+												<AnchorPane maxHeight="-Infinity" minHeight="0.0"
+													minWidth="0.0" prefHeight="98.0" prefWidth="559.0">
+													<children>
+														<HBox fx:id="terminBox114" alignment="CENTER_LEFT"
+															minHeight="-Infinity" prefHeight="50.0" prefWidth="560.0">
+															<children>
+																<Label fx:id="terminL14" minWidth="-Infinity"
+																	prefHeight="18.0" prefWidth="75.0" text="Termine:">
+																	<HBox.margin>
+																		<Insets left="10.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="terminwahl14" prefHeight="28.0"
+																	prefWidth="170.0" />
+																<Label fx:id="datumL14" prefHeight="18.0"
+																	prefWidth="75.0" text="Datum:">
+																	<HBox.margin>
+																		<Insets left="20.0" />
+																	</HBox.margin>
+																</Label>
+																<DatePicker fx:id="datumwahl14">
+																	<HBox.margin>
+																		<Insets />
+																	</HBox.margin>
+																</DatePicker>
+															</children>
+														</HBox>
+														<HBox fx:id="terminBox214" alignment="CENTER_LEFT"
+															layoutY="50.0" minHeight="-Infinity" prefHeight="50.0"
+															prefWidth="562.0">
+															<children>
+																<Label fx:id="uhrzeitL14" prefHeight="18.0"
+																	prefWidth="75.0" text="Uhrzeit:">
+																	<HBox.margin>
+																		<Insets left="10.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="UhrzeitStunden14"
+																	prefHeight="28.0" prefWidth="45.0" />
+																<Label fx:id="zeitseperator14" text=":">
+																	<HBox.margin>
+																		<Insets left="5.0" right="5.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="UhrzeitMinuten14"
+																	prefHeight="28.0" prefWidth="45.0" />
+																<Label fx:id="ortL14" prefHeight="18.0" prefWidth="30.0"
+																	text="Ort:">
+																	<HBox.margin>
+																		<Insets left="30.0" />
+																	</HBox.margin>
+																</Label>
+																<ChoiceBox fx:id="ortwahl14" prefHeight="28.0"
+																	prefWidth="170.0" />
+																<Separator orientation="VERTICAL" prefHeight="200.0">
+																	<HBox.margin>
+																		<Insets left="5.0" right="5.0" />
+																	</HBox.margin>
+																</Separator>
+																<ComboBox fx:id="statusBox14" minWidth="-Infinity"
+																	prefWidth="100.0" promptText="Status">
+																	<HBox.margin>
+																		<Insets />
+																	</HBox.margin>
+																</ComboBox>
+															</children>
+														</HBox>
+													</children>
+												</AnchorPane>
+											</content>
+										</TitledPane>
+									</panes>
+								</Accordion>
+								<HBox alignment="CENTER" minHeight="-Infinity" prefHeight="56.0"
+									prefWidth="561.0" spacing="10.0">
+									<children>
+										<Button fx:id="speichern" mnemonicParsing="false"
+											onAction="#onActionSave" text="Speichern" />
+										<Button fx:id="change" mnemonicParsing="false"
+											onAction="#onActionChange" text="Bearbeiten" />
+									</children>
+								</HBox>
+							</children>
+						</VBox>
+					</children>
+				</AnchorPane>
+			</content>
+			<padding>
+				<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+			</padding>
+		</ScrollPane>
+	</children>
 </AnchorPane>
