@@ -69,6 +69,9 @@ public class PatientsController {
 
     @FXML
     private TextField passwortText;
+    
+    @FXML
+    private Button speichernDaten;
 
     @FXML
     private Label KontakteL;
@@ -102,6 +105,9 @@ public class PatientsController {
 
     @FXML
     private ChoiceBox<Object> rehawahl;
+    
+    @FXML
+    private Button speichernKontakte;
 
     @FXML
     private Label AblaufL;
@@ -698,6 +704,17 @@ public class PatientsController {
     
     @FXML
     private HBox terminBox3;
+    
+    
+    @FXML
+    void onActionSaveDaten(ActionEvent event) {
+    	speichernDaten.onActionProperty();
+    }
+    
+    @FXML
+    void onActionSaveKontakte(ActionEvent event) {
+    	speichernKontakte.onActionProperty();
+    }
     
     //Die Felder werden aktiviert wenn sie bearbeitet werden sollen
     @FXML

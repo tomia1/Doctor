@@ -1,11 +1,19 @@
 package application.controllers;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+
+import java.sql.DriverManager;
+import com.microsoft.sqlserver.jdbc.*;
 
 import javax.inject.Inject;
 
 import org.controlsfx.control.action.ActionMap;
 
+import application.MyApplication;
+import application.MyConn;
 import com.gluonhq.particle.application.ParticleApplication;
 import com.gluonhq.particle.state.StateManager;
 import com.gluonhq.particle.view.ViewManager;
@@ -16,6 +24,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 
 /**
  * Die Klasse LoginController beinhaltet das Login für den Arzt. Einfach gestaltet mit einer kurzen Begruessung
@@ -64,6 +73,8 @@ public class LoginController {
     @FXML
     private Button btnAnmelden;
     
+    public java.sql.Connection con;
+    
     /**
      * Damit der Arzt auf die Patientenverwaltung zugreifen kann, muss er sich zuerst einloggen.
      * Wenn das Feld fuer Benutzername/Passwort leer oder nicht das richtige enthaelt wird im Feld Benutzername
@@ -72,21 +83,61 @@ public class LoginController {
      */
     @FXML
     void onActionLogin(ActionEvent event) {
-    	if(benutzerText.getText().equals("hager") && passwortText.getText().equals("hager")) {
-    		 btnAnmelden.setOnAction(e -> viewManager.switchView("patients"));	
-    	} else if((!benutzerText.getText().equals("hager") || !benutzerText.getText().equals(null)) 
-    			|| (!passwortText.getText().equals("hager") || !passwortText.getText().equals(null))
-    			||(!benutzerText.getText().equals("hager") && !benutzerText.getText().equals(null)) 
-    			|| (!passwortText.getText().equals("hager") && !passwortText.getText().equals(null))) {
-    		benutzerText.setText(null);
-    		benutzerText.setPromptText("Benutzer evtl. falsch");
-    		passwortText.setText(null);
-    		passwortText.setPromptText("Passwort evtl. falsch");
-    	} else {
-    		benutzerText.setPromptText("Benutzer evtl. falsch");
-    		passwortText.setPromptText("Passwort evtl. falsch");
+    	
+    	MyConn co = new MyConn();
+    	con=co.getconn();
+    	String query ="Select * from login where Username=? and Password=?";
+    	try {
+    		PreparedStatement pst=con.prepareStatement(query);
+    		pst.setString(1, benutzerText.getText());
+    		pst.setString(2, passwortText.getText());
+    		ResultSet rs=pst.executeQuery();
+    		int i=0;
+    		String _user="";
+    		String _pass="";
+    		while (rs.next()){
+    			_user=rs.getString("Username");
+    			_pass=rs.getString("Password");
+    			}
+    		if (_user.equals(benutzerText.getText()) && _pass.equals(passwortText.getText())) {
+	         	btnAnmelden.setOnAction(e -> viewManager.switchView("patients")); 			
+    		}
+    		else if(!_user.equals(benutzerText.getText()) && !_user.equals(passwortText.getText())
+    				|| !_user.equals(benutzerText.getText()) || !_user.equals(passwortText.getText())){
+    			benutzerText.setText(null);
+        		benutzerText.setPromptText("Benutzer evtl. falsch");
+        		passwortText.setText(null);
+        		passwortText.setPromptText("Passwort evtl. falsch");	
+    		}else {
+    			benutzerText.setPromptText("Benutzer evtl. falsch");
+        		passwortText.setPromptText("Passwort evtl. falsch");
+    		}
     	}
-    }
+    	catch (SQLException e1) {
+    		e1.printStackTrace();
+    	
+    	}
+    	
+    };
+    
+
+    	
+    	
+//    	if(benutzerText.getText().equals("hager") && passwortText.getText().equals("hager")) {
+//    		 btnAnmelden.setOnAction(e -> viewManager.switchView("patients"));	
+//    	} else if((!benutzerText.getText().equals("hager") || !benutzerText.getText().equals(null)) 
+//    			|| (!passwortText.getText().equals("hager") || !passwortText.getText().equals(null))
+//    			||(!benutzerText.getText().equals("hager") && !benutzerText.getText().equals(null)) 
+//    			|| (!passwortText.getText().equals("hager") && !passwortText.getText().equals(null))) {
+//    		benutzerText.setText(null);
+//    		benutzerText.setPromptText("Benutzer evtl. falsch");
+//    		passwortText.setText(null);
+//    		passwortText.setPromptText("Passwort evtl. falsch");
+//    	} else {
+//    		benutzerText.setPromptText("Benutzer evtl. falsch");
+//    		passwortText.setPromptText("Passwort evtl. falsch");
+//    	}
+//    }
     
     
     public void initialize() {
