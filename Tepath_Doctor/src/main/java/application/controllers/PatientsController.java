@@ -1,5 +1,10 @@
 package application.controllers;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 
 import javax.inject.Inject;
@@ -11,6 +16,9 @@ import org.controlsfx.control.action.ActionProxy;
 import com.gluonhq.particle.application.ParticleApplication;
 import com.gluonhq.particle.view.ViewManager;
 
+import application.MyConn;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -757,18 +765,78 @@ public class PatientsController {
     private ResourceBundle resources;
     
     private Action actionHome;
+
+	private Connection con;
+	
+	@SuppressWarnings("rawtypes")
+	@FXML
+    ObservableList GetName() throws SQLException {
+    	ObservableList<String> op = FXCollections.observableArrayList();
+    MyConn co = new MyConn();
+	con=co.getconn();
+	Statement st = con.createStatement();
+	String query1 = "Select Vorname, Nachname from Patienten";
+	ResultSet rs = st.executeQuery(query1);
+	String full = "";
+	String vor = "";
+	String nach = "";
+	while(rs.next()){
+		vor = rs.getString("Vorname");
+		nach = rs.getString("Nachname");
+		full = vor +" "+ nach;
+		op.add(full);
+//	while(rs.next()){
+//		op.add(rs.getString("Vorname"+"Nachname"));
+//		patientenwahl.getItems().add(op);
+	}
+	con.close();
+	return op;
+    }
+	
+	@SuppressWarnings("rawtypes")
+	@FXML
+	ObservableList Hausarzt() throws SQLException {
+		ObservableList<String> listHausarzt = FXCollections.observableArrayList();
+		MyConn co = new MyConn();
+		con=co.getconn();
+		Statement st = con.createStatement();
+		String query1 = "Select Name from Hausarzt";
+		ResultSet rs = st.executeQuery(query1);
+		while(rs.next()){
+			listHausarzt.add(rs.getString("Name"));
+		}
+		con.close();
+		return listHausarzt;
+	    }
+	
+//	@FXML
+//	ObservableList Spezialist() throws SQLException {
+//		
+//	}
+//	
+//	@FXML
+//	ObservableList Reha() throws SQLException {
+//		
+//	}
     
-    public void initialize() {
+    @SuppressWarnings("unchecked")
+	public void initialize() throws SQLException{
         ActionMap.register(this);
         actionHome =  ActionMap.action("goHome");
         
         /**
          * Die einzelnen ChoiceBoxen werden hier mit Informationen/Auswahlmoeglichkeiten befüllt.
          */
+        patientenwahl.setItems(GetName());
+        
+    	hausarztwahl.setItems(Hausarzt());
+    		
+    	
+    		
         
         //choiceBox pateintenwahl Elemente hinzufügen
-        ((ChoiceBox<Object>)patientenwahl).getItems().addAll("", "Elisabeth Brönimann",
-        		"Susanne Meier", "Margrit Bauer");
+//        ((ChoiceBox<Object>)patientenwahl).getItems().addAll("", "Elisabeth Brönimann",
+//        		"Susanne Meier", "Margrit Bauer");
        
         //choiceBox hausarzt Elemente hinzufügen
         ((ChoiceBox<Object>)hausarztwahl).getItems().addAll("", "Dr. Wenger", "Dr. Keller");
@@ -1158,7 +1226,8 @@ public class PatientsController {
 		statusBox12.getItems().addAll(fertigText, offenText, verschobenText);
 		statusBox13.getItems().addAll(fertigText, offenText, verschobenText);
 		statusBox14.getItems().addAll(fertigText, offenText, verschobenText);
-    }
+		
+    	}
     
     public void postInit() {
         app.getParticle().getToolBarActions().add(0, actionHome);
