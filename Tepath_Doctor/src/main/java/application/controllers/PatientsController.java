@@ -1,10 +1,10 @@
 package application.controllers;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.inject.Inject;
@@ -479,96 +479,6 @@ public class PatientsController {
     
     @FXML
     private ChoiceBox<Object> UhrzeitMinuten14;
-
-    @FXML
-    private Label ortL;
-    
-    @FXML
-    private Label ortL1;
-    
-    @FXML
-    private Label ortL2;
-    
-    @FXML
-    private Label ortL3;
-    
-    @FXML
-    private Label ortL4;
-    
-    @FXML
-    private Label ortL5;
-    
-    @FXML
-    private Label ortL6;
-    
-    @FXML
-    private Label ortL7;
-    
-    @FXML
-    private Label ortL8;
-    
-    @FXML
-    private Label ortL9;
-    
-    @FXML
-    private Label ortL10;
-    
-    @FXML
-    private Label ortL11;
-    
-    @FXML
-    private Label ortL12;
-    
-    @FXML
-    private Label ortL13;
-    
-    @FXML
-    private Label ortL14;
-
-    @FXML
-    private ChoiceBox<Object> ortwahl;
-    
-    @FXML
-    private ChoiceBox<Object> ortwahl1;
-    
-    @FXML
-    private ChoiceBox<Object> ortwahl2;
-    
-    @FXML
-    private ChoiceBox<Object> ortwahl3;
-    
-    @FXML
-    private ChoiceBox<Object> ortwahl4;
-    
-    @FXML
-    private ChoiceBox<Object> ortwahl5;
-    
-    @FXML
-    private ChoiceBox<Object> ortwahl6;
-    
-    @FXML
-    private ChoiceBox<Object> ortwahl7;
-    
-    @FXML
-    private ChoiceBox<Object> ortwahl8;
-    
-    @FXML
-    private ChoiceBox<Object> ortwahl9;
-    
-    @FXML
-    private ChoiceBox<Object> ortwahl10;
-    
-    @FXML
-    private ChoiceBox<Object> ortwahl11;
-    
-    @FXML
-    private ChoiceBox<Object> ortwahl12;
-    
-    @FXML
-    private ChoiceBox<Object> ortwahl13;
-    
-    @FXML
-    private ChoiceBox<Object> ortwahl14;
     
     @FXML
     private ComboBox<Object> statusBox;
@@ -617,9 +527,6 @@ public class PatientsController {
 
     @FXML
     private Button speichern;
-
-    @FXML
-    private Button change;
     
     @FXML
     private HBox terminBox1;
@@ -713,32 +620,136 @@ public class PatientsController {
     @FXML
     private HBox terminBox3;
     
+    @FXML
+    private Label terminVerschiebenL;
+    
+    @FXML
+    private Label terminLV;
+    
+    @FXML
+    private ChoiceBox<Object> terminwahlV;
+    
+    @FXML
+    private Label datumLV;
+    
+    @FXML
+    private DatePicker datumwahlV;
+    
+    @FXML
+    private Label uhrzeitLV;
+    
+    @FXML
+    private ChoiceBox<Object> UhrzeitStundenV;
+    
+    @FXML
+    private Label zeitseperatorV;
+    
+    @FXML
+    private ChoiceBox<Object> UhrzeitMinutenV;
+    
+    @FXML
+    private ComboBox<Object> statusBoxV;
+    
+    @FXML
+    private Button speichernTerminVerschieben;
+    
+    @FXML
+    void onActionTerminVerschieben(ActionEvent event){
+    	speichernTerminVerschieben.onActionProperty();
+    	terminwahlV.getSelectionModel().getSelectedItem();
+    }
+    
     
     @FXML
     void onActionSaveDaten(ActionEvent event) {
-    	speichernDaten.onActionProperty();
+    	try{
+    		MyConn co = new MyConn();
+    		con=co.getconn();
+			Statement myStmt = con.createStatement();
+			ResultSet myRs = myStmt.executeQuery("select * from Login");
+			ResultSet gleichUser = myStmt.executeQuery("select Username from Login");
+			ResultSet gleichPassw = myStmt.executeQuery("select Password from Login");
+			String user = benutzerText.getText();
+			String pswd = passwortText.getText();
+			while (myRs.next() ) {
+				myStmt.executeUpdate("Insert INTO [dbo].[Login]([Username],[Password]) VALUES ('"+ user+"','"+pswd+"')");
+//				myStmt.executeUpdate("Insert INTO Password VALUES ('"+ pswd+"')");
+			}
+			if (benutzerText.getText().equals(null) || passwortText.getText().equals(null)) {
+				myStmt.cancel();
+				benutzerText.setText(null);
+				passwortText.setText(null);
+			}
+			else if(benutzerText.getText().equals(gleichUser) || passwortText.getText().equals(gleichPassw)) {
+				myStmt.cancel();
+				myStmt.clearBatch();
+				benutzerText.setText(null);
+				passwortText.setText(null);
+				benutzerText.setPromptText("Benutzer existiert bereits!");
+			}
+			myRs.close();
+			gleichUser.close();
+			gleichPassw.close();
+			con.close();
+		}
+		catch(Exception exc){
+			exc.getMessage();
+		}
+    	patientenwahl.getSelectionModel().getSelectedItem();
     }
     
     @FXML
     void onActionSaveKontakte(ActionEvent event) {
-    	speichernKontakte.onActionProperty();
+    	try {
+    		MyConn co = new MyConn();
+    		con = co.getconn();
+    		Statement myStmt = con.createStatement();
+    		ResultSet myRs = myStmt.executeQuery("select * FROM Patienten");
+    		Object user = patientenwahl.getSelectionModel().getSelectedItem();
+    		String[] splitted = ((String) user).split(" ");
+    		String vorname = splitted[0];
+    		String nachname = splitted[splitted.length];
+    	Object hausA = hausarztwahl.getSelectionModel().getSelectedItem();
+    	Object spitalW = spitalwahl.getSelectionModel().getSelectedItem();
+    	Object rehaW = rehawahl.getSelectionModel().getSelectedItem();
+    	Object apoW = apothekenwahl.getSelectionModel().getSelectedItem();
+    	Object spezA = spezialistwahl.getSelectionModel().getSelectedItem();
+    	while(myRs.next()){
+    		myStmt.executeUpdate("UPDATE [dbo].[Patienten]([Hausarzt],[Spital],[Apotheke],[Reha],[Spezialist]) "
+    				+ "VALUES ('"+hausA+"', '"+spitalW+"', '"+rehaW+"', '"+apoW+"', '"+spezA+"') "
+    						+ "WHERE Vorname=" +vorname+"AND Nachname="+nachname);
+    	}
+    	if(vorname.equals(null) || nachname.equals(null)){
+    		myStmt.cancel();
+			myStmt.clearBatch();
+    	}
+    	else if(hausA.equals(null)) {
+    		myStmt.cancel();
+			myStmt.clearBatch();
+    	}
+    	else if(spitalW.equals(null)) {
+    		myStmt.cancel();
+			myStmt.clearBatch();
+    	}
+    	else if(rehaW.equals(null)) {
+    		myStmt.cancel();
+			myStmt.clearBatch();
+    	}
+    	else if(apoW.equals(null)) {
+    		myStmt.cancel();
+			myStmt.clearBatch();
+    	}
+    	else if(spezA.equals(null)) {
+    		myStmt.cancel();
+			myStmt.clearBatch();
+    	}
+    	con.close();
+    	}
+    	catch(Exception exc) {
+    		exc.getMessage();
+    	}
     }
-    
-    //Die Felder werden aktiviert wenn sie bearbeitet werden sollen
-    @FXML
-    void onActionChange(ActionEvent event) {
-    	change.setOnAction(e -> patientenwahl.setDisable(false));
-    	change.setOnAction(e -> hausarztwahl.setDisable(false));
-    	change.setOnAction(e -> spitalwahl.setDisable(false));
-    	change.setOnAction(e -> rehawahl.setDisable(false));
-    	change.setOnAction(e -> apothekenwahl.setDisable(false));
-    	change.setOnAction(e -> spezialistwahl.setDisable(false));
-    	change.setOnAction(e -> terminwahl.setDisable(false));
-    	change.setOnAction(e -> UhrzeitStunden.setDisable(false));
-    	change.setOnAction(e -> UhrzeitMinuten.setDisable(false));
-    	change.setOnAction(e -> ortwahl.setDisable(false));
-    	change.setOnAction(e -> datumwahl.setDisable(false));
-    }
+  
 
     
 /**Die Felder werder bei speicherung der Informationen deaktiviert und koennen nicht bearbeitet werden.
@@ -748,17 +759,23 @@ public class PatientsController {
     
     @FXML
     void onActionSave(ActionEvent event) {
-    	speichern.setOnAction(e -> patientenwahl.setDisable(true));
-    	speichern.setOnAction(e -> hausarztwahl.setDisable(true));
-    	speichern.setOnAction(e -> spitalwahl.setDisable(true));
-    	speichern.setOnAction(e -> rehawahl.setDisable(true));
-    	speichern.setOnAction(e -> apothekenwahl.setDisable(true));
-    	speichern.setOnAction(e -> spezialistwahl.setDisable(true));
-    	speichern.setOnAction(e -> terminwahl.setDisable(true));
-    	speichern.setOnAction(e -> UhrzeitStunden.setDisable(true));
-    	speichern.setOnAction(e -> UhrzeitMinuten.setDisable(true));
-    	speichern.setOnAction(e -> ortwahl.setDisable(true));
-    	speichern.setOnAction(e -> datumwahl.setDisable(true));
+    	
+    	speichern.onActionProperty();
+    	terminwahl.getSelectionModel().getSelectedItem();
+    	terminwahl1.getSelectionModel().getSelectedItem();
+    	terminwahl2.getSelectionModel().getSelectedItem();
+    	terminwahl3.getSelectionModel().getSelectedItem();
+    	terminwahl4.getSelectionModel().getSelectedItem();
+    	terminwahl5.getSelectionModel().getSelectedItem();
+    	terminwahl6.getSelectionModel().getSelectedItem();
+    	terminwahl7.getSelectionModel().getSelectedItem();
+    	terminwahl8.getSelectionModel().getSelectedItem();
+    	terminwahl9.getSelectionModel().getSelectedItem();
+    	terminwahl10.getSelectionModel().getSelectedItem();
+    	terminwahl11.getSelectionModel().getSelectedItem();
+    	terminwahl12.getSelectionModel().getSelectedItem();
+    	terminwahl13.getSelectionModel().getSelectedItem();
+    	terminwahl14.getSelectionModel().getSelectedItem();
     }
 
     @FXML
@@ -767,6 +784,11 @@ public class PatientsController {
     private Action actionHome;
 
 	private Connection con;
+	
+	/**
+	 * Um die Namen der Aerzte und der Institutionen aus der Datenbank zu holen und in die ChoiceBoxen als Auswahlmoeglichkeiten
+	 * hineinzufuegen, muessen eine Observable Liste erstellt werden und die Daten dort abgelegt werden. 
+	 */
 	
 	@SuppressWarnings("rawtypes")
 	@FXML
@@ -785,9 +807,6 @@ public class PatientsController {
 		nach = rs.getString("Nachname");
 		full = vor +" "+ nach;
 		op.add(full);
-//	while(rs.next()){
-//		op.add(rs.getString("Vorname"+"Nachname"));
-//		patientenwahl.getItems().add(op);
 	}
 	con.close();
 	return op;
@@ -799,63 +818,118 @@ public class PatientsController {
 		ObservableList<String> listHausarzt = FXCollections.observableArrayList();
 		MyConn co = new MyConn();
 		con=co.getconn();
-		Statement st = con.createStatement();
-		String query1 = "Select Name from Hausarzt";
-		ResultSet rs = st.executeQuery(query1);
-		while(rs.next()){
-			listHausarzt.add(rs.getString("Name"));
+		Statement st2 = con.createStatement();
+		String query2 = "Select Name from Hausarzt";
+		ResultSet rs2 = st2.executeQuery(query2);
+		while(rs2.next()){
+			listHausarzt.add(rs2.getString("Name"));
 		}
 		con.close();
 		return listHausarzt;
 	    }
 	
-//	@FXML
-//	ObservableList Spezialist() throws SQLException {
-//		
-//	}
-//	
-//	@FXML
-//	ObservableList Reha() throws SQLException {
-//		
-//	}
+	@SuppressWarnings("rawtypes")
+	@FXML
+	ObservableList Spezialist() throws SQLException {
+		ObservableList<String> listSpezialist = FXCollections.observableArrayList();
+		MyConn co = new MyConn();
+		con=co.getconn();
+		Statement st3 = con.createStatement();
+		String query3 = "Select Name from Spezialist";
+		ResultSet rs3 = st3.executeQuery(query3);
+		while(rs3.next()){
+			listSpezialist.add(rs3.getString("Name"));
+		}
+		con.close();
+		return listSpezialist;
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@FXML
+	ObservableList Reha() throws SQLException {
+		ObservableList<String> listReha = FXCollections.observableArrayList();
+		MyConn co = new MyConn();
+		con=co.getconn();
+		Statement st4 = con.createStatement();
+		String query4 = "Select Name from Reha";
+		ResultSet rs4 = st4.executeQuery(query4);
+		while(rs4.next()){
+			listReha.add(rs4.getString("Name"));
+		}
+		con.close();
+		return listReha;
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@FXML
+	ObservableList Spital() throws SQLException {
+		ObservableList<String> listSpital = FXCollections.observableArrayList();
+		MyConn co = new MyConn();
+		con=co.getconn();
+		Statement st5 = con.createStatement();
+		String query5 = "Select Name from Spital";
+		ResultSet rs5 = st5.executeQuery(query5);
+		while(rs5.next()){
+			listSpital.add(rs5.getString("Name"));
+		}
+		con.close();
+		return listSpital;
+	}
     
+	@SuppressWarnings("rawtypes")
+	@FXML
+	ObservableList Apotheke() throws SQLException {
+		ObservableList<String> listApotheke = FXCollections.observableArrayList();
+		MyConn co = new MyConn();
+		con=co.getconn();
+		Statement st6 = con.createStatement();
+		String query6 = "Select Name from Apothek";
+		ResultSet rs6 = st6.executeQuery(query6);
+		while(rs6.next()){
+			listApotheke.add(rs6.getString("Name"));
+		}
+		con.close();
+		return listApotheke;
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@FXML
+	ObservableList Termine() throws SQLException {
+		ObservableList<String> listTermine = FXCollections.observableArrayList();
+		MyConn co = new MyConn();
+		con = co.getconn();
+		Statement st7 = con.createStatement();
+		String query7 = "Select Name from Termine";
+		ResultSet rs7 = st7.executeQuery(query7);
+		while(rs7.next()){
+			listTermine.add(rs7.getString("Name"));
+		}
+		con.close();
+		return listTermine;
+	}
+	
     @SuppressWarnings("unchecked")
 	public void initialize() throws SQLException{
         ActionMap.register(this);
         actionHome =  ActionMap.action("goHome");
         
         /**
-         * Die einzelnen ChoiceBoxen werden hier mit Informationen/Auswahlmoeglichkeiten befüllt.
+         * Die Listen die vorher erstellt wurden, werden hier den Choiceboxen hinzugefuegt.
          */
         patientenwahl.setItems(GetName());
         
     	hausarztwahl.setItems(Hausarzt());
     		
+    	apothekenwahl.setItems(Apotheke());
     	
+    	spitalwahl.setItems(Spital());
+    	
+    	rehawahl.setItems(Reha());
+    	
+    	spezialistwahl.setItems(Spezialist());
+    	
+    	terminwahlV.setItems(Termine());
     		
-        
-        //choiceBox pateintenwahl Elemente hinzufügen
-//        ((ChoiceBox<Object>)patientenwahl).getItems().addAll("", "Elisabeth Brönimann",
-//        		"Susanne Meier", "Margrit Bauer");
-       
-        //choiceBox hausarzt Elemente hinzufügen
-        ((ChoiceBox<Object>)hausarztwahl).getItems().addAll("", "Dr. Wenger", "Dr. Keller");
-        
-        //choiceBox spital Elemente hinzufügen
-        ((ChoiceBox<Object>)spitalwahl).getItems().addAll("", "SZB - Spitalzentrum Biel", 
-        		"USZ - Universitätsspital Zürich", "Inselspital Bern");
-        
-        //choiceBox apotheke Elemente hinzufügen
-        ((ChoiceBox<Object>)apothekenwahl).getItems().addAll("", "Apotheke Sonnenberg",
-        		"Apotheke Müller", "Apotheke zum Kreuz");
-        
-        //choiceBox reha Elemenete hinzufügen
-        ((ChoiceBox<Object>)rehawahl).getItems().addAll("", "Rehaklinik Linde", 
-        		"Reha Rheinfeld", "Rehaklinik Hasliberg");
-        
-        //choiceBox spezialist Elemente hinzufügen
-        ((ChoiceBox<Object>)spezialistwahl).getItems().addAll("", "Dr. Knochenbrecher",
-        		"Dr. Müller", "Dr. Profi");
         
         /**
          * Bei den Terminen sind mehrere Termine möglich. Hierfür wurde in der FXML-Datei ein "Accordion" erstellt.
@@ -1103,81 +1177,6 @@ public class PatientsController {
       //choiceBox Uhrzeit Minuten Elemente hinzufügen
         ((ChoiceBox<Object>)UhrzeitMinuten14).getItems().addAll("05", "10", "15", "20", "25",
         		"30", "35", "40", "45", "50", "55", "00");
-        
-        //choiceBox Ort Elemente hinzufügen
-        ((ChoiceBox<Object>)ortwahl).getItems().addAll("Hausarzt Praxis", "Spezialist Praxis", 
-        		"Spital Empfang", "Stationszimmer", "Radiologieabteilung", "Orthopädieabteilung", 
-        		"OP-Abteilung", "Reha Empfang");  
-        
-      //choiceBox Ort Elemente hinzufügen
-        ((ChoiceBox<Object>)ortwahl1).getItems().addAll("Hausarzt Praxis", "Spezialist Praxis", 
-        		"Spital Empfang", "Stationszimmer", "Radiologieabteilung", "Orthopädieabteilung", 
-        		"OP-Abteilung", "Reha Empfang");
-        
-      //choiceBox Ort Elemente hinzufügen
-        ((ChoiceBox<Object>)ortwahl2).getItems().addAll("Hausarzt Praxis", "Spezialist Praxis", 
-        		"Spital Empfang", "Stationszimmer", "Radiologieabteilung", "Orthopädieabteilung", 
-        		"OP-Abteilung", "Reha Empfang");
-        
-      //choiceBox Ort Elemente hinzufügen
-        ((ChoiceBox<Object>)ortwahl3).getItems().addAll("Hausarzt Praxis", "Spezialist Praxis", 
-        		"Spital Empfang", "Stationszimmer", "Radiologieabteilung", "Orthopädieabteilung", 
-        		"OP-Abteilung", "Reha Empfang");
-        
-      //choiceBox Ort Elemente hinzufügen
-        ((ChoiceBox<Object>)ortwahl4).getItems().addAll("Hausarzt Praxis", "Spezialist Praxis", 
-        		"Spital Empfang", "Stationszimmer", "Radiologieabteilung", "Orthopädieabteilung", 
-        		"OP-Abteilung", "Reha Empfang");
-        
-      //choiceBox Ort Elemente hinzufügen
-        ((ChoiceBox<Object>)ortwahl5).getItems().addAll("Hausarzt Praxis", "Spezialist Praxis", 
-        		"Spital Empfang", "Stationszimmer", "Radiologieabteilung", "Orthopädieabteilung", 
-        		"OP-Abteilung", "Reha Empfang");
-        
-      //choiceBox Ort Elemente hinzufügen
-        ((ChoiceBox<Object>)ortwahl6).getItems().addAll("Hausarzt Praxis", "Spezialist Praxis", 
-        		"Spital Empfang", "Stationszimmer", "Radiologieabteilung", "Orthopädieabteilung", 
-        		"OP-Abteilung", "Reha Empfang");
-        
-      //choiceBox Ort Elemente hinzufügen
-        ((ChoiceBox<Object>)ortwahl7).getItems().addAll("Hausarzt Praxis", "Spezialist Praxis", 
-        		"Spital Empfang", "Stationszimmer", "Radiologieabteilung", "Orthopädieabteilung", 
-        		"OP-Abteilung", "Reha Empfang");
-        
-      //choiceBox Ort Elemente hinzufügen
-        ((ChoiceBox<Object>)ortwahl8).getItems().addAll("Hausarzt Praxis", "Spezialist Praxis", 
-        		"Spital Empfang", "Stationszimmer", "Radiologieabteilung", "Orthopädieabteilung", 
-        		"OP-Abteilung", "Reha Empfang");
-        
-      //choiceBox Ort Elemente hinzufügen
-        ((ChoiceBox<Object>)ortwahl9).getItems().addAll("Hausarzt Praxis", "Spezialist Praxis", 
-        		"Spital Empfang", "Stationszimmer", "Radiologieabteilung", "Orthopädieabteilung", 
-        		"OP-Abteilung", "Reha Empfang");
-        
-      //choiceBox Ort Elemente hinzufügen
-        ((ChoiceBox<Object>)ortwahl10).getItems().addAll("Hausarzt Praxis", "Spezialist Praxis", 
-        		"Spital Empfang", "Stationszimmer", "Radiologieabteilung", "Orthopädieabteilung", 
-        		"OP-Abteilung", "Reha Empfang");
-        
-      //choiceBox Ort Elemente hinzufügen
-        ((ChoiceBox<Object>)ortwahl11).getItems().addAll("Hausarzt Praxis", "Spezialist Praxis", 
-        		"Spital Empfang", "Stationszimmer", "Radiologieabteilung", "Orthopädieabteilung", 
-        		"OP-Abteilung", "Reha Empfang");
-        
-      //choiceBox Ort Elemente hinzufügen
-        ((ChoiceBox<Object>)ortwahl12).getItems().addAll("Hausarzt Praxis", "Spezialist Praxis", 
-        		"Spital Empfang", "Stationszimmer", "Radiologieabteilung", "Orthopädieabteilung", 
-        		"OP-Abteilung", "Reha Empfang");
-        
-      //choiceBox Ort Elemente hinzufügen
-        ((ChoiceBox<Object>)ortwahl13).getItems().addAll("Hausarzt Praxis", "Spezialist Praxis", 
-        		"Spital Empfang", "Stationszimmer", "Radiologieabteilung", "Orthopädieabteilung", 
-        		"OP-Abteilung", "Reha Empfang");
-        
-      //choiceBox Ort Elemente hinzufügen
-        ((ChoiceBox<Object>)ortwahl14).getItems().addAll("Hausarzt Praxis", "Spezialist Praxis", 
-        		"Spital Empfang", "Stationszimmer", "Radiologieabteilung", "Orthopädieabteilung", 
-        		"OP-Abteilung", "Reha Empfang");
         
         
         /**Beim Status wird neben dem Text noch eine Farbe definiert und die Termine unterscheiden zu koennen

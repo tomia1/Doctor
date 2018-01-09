@@ -11,13 +11,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" fx:id="login" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.LoginController">
+<AnchorPane id="AnchorPane" fx:id="login" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.LoginController">
    <children>
-      <VBox prefHeight="400.0" prefWidth="600.0" spacing="0.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+      <VBox prefHeight="450.0" prefWidth="650.0" spacing="0.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
          <children>
-            <Label fx:id="welcomeLabel" style="-fx-font-size: 20;" text="Willkommen zur Desktopanwendung der Applikation &quot;TEPATH&quot;!" wrapText="true" />
+            <Label fx:id="welcomeLabel" prefHeight="70.0" prefWidth="600.0" style="-fx-font-size: 20;" text="Willkommen zur Desktopanwendung der Applikation &quot;TEPATH&quot;!" wrapText="true" />
             <Label fx:id="infoLabel" prefHeight="70.0" prefWidth="600.0" style="-fx-font-size: 20;" text="Um auf die Patientendaten zuzugreifen und diese verwalten können, müssen Sie sich zuerst anmelden." wrapText="true" />
-            <VBox prefHeight="112.0" prefWidth="580.0">
+            <VBox prefHeight="112.0" prefWidth="600.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="31.0" prefWidth="580.0">
                      <children>

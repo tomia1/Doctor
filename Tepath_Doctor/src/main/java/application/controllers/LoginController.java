@@ -5,14 +5,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import java.sql.DriverManager;
-import com.microsoft.sqlserver.jdbc.*;
-
 import javax.inject.Inject;
 
 import org.controlsfx.control.action.ActionMap;
 
-import application.MyApplication;
 import application.MyConn;
 import com.gluonhq.particle.application.ParticleApplication;
 import com.gluonhq.particle.state.StateManager;
@@ -24,7 +20,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 
 /**
  * Die Klasse LoginController beinhaltet das Login für den Arzt. Einfach gestaltet mit einer kurzen Begruessung
@@ -86,18 +81,17 @@ public class LoginController {
     	
     	MyConn co = new MyConn();
     	con=co.getconn();
-    	String query ="Select * from login where Username=? and Password=?";
+    	String query ="Select * from login_Doctor where UsernameD=? and PasswordD=?";
     	try {
     		PreparedStatement pst=con.prepareStatement(query);
     		pst.setString(1, benutzerText.getText());
     		pst.setString(2, passwortText.getText());
     		ResultSet rs=pst.executeQuery();
-    		int i=0;
     		String _user="";
     		String _pass="";
     		while (rs.next()){
-    			_user=rs.getString("Username");
-    			_pass=rs.getString("Password");
+    			_user=rs.getString("UsernameD");
+    			_pass=rs.getString("PasswordD");
     			}
     		if (_user.equals(benutzerText.getText()) && _pass.equals(passwortText.getText())) {
 	         	btnAnmelden.setOnAction(e -> viewManager.switchView("patients")); 			
