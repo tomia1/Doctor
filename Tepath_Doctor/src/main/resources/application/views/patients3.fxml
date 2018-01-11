@@ -164,12 +164,12 @@
 												<Insets left="5.0" right="5.0" />
 											</HBox.margin>
 										</Separator>
-                              <Label fx:id="uhrzeitL15" layoutX="20.0" layoutY="25.0" prefHeight="18.0" prefWidth="75.0" text="Status:">
-                                 <HBox.margin>
-                                    <Insets left="70.0" />
-                                 </HBox.margin>
-                              </Label>
-                              <ChoiceBox fx:id="statusBox" minWidth="-Infinity" prefWidth="100.0" />
+										<ComboBox fx:id="statusBox" minWidth="-Infinity" prefWidth="100.0" promptText="Status">
+											<HBox.margin>
+												<Insets />
+											</HBox.margin>
+										</ComboBox>
+                              <ChoiceBox fx:id="statusBox" prefHeight="28.0" prefWidth="170.0" />
 									</children>
 								</HBox>
 								<Separator prefWidth="200.0" visible="false" />

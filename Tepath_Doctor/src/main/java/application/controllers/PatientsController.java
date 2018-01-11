@@ -6,7 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -37,6 +40,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.control.DatePicker;
 
 
 /**
@@ -489,7 +493,7 @@ public class PatientsController {
     private ChoiceBox<Object> UhrzeitMinuten14;
     
     @FXML
-    private ComboBox<Object> statusBox;
+    private ChoiceBox<Object> statusBox;
     
     @FXML
     private ComboBox<Object> statusBox1;
@@ -661,7 +665,22 @@ public class PatientsController {
     @FXML
     private Button speichernTerminVerschieben;
     
+  //  DatePicker datePicker = new DatePicker();
     
+
+public java.sql.Date datenow;
+public int TerminIDs;
+    
+    @FXML
+    void Daaaatee(ActionEvent event) {
+//    	java.sql.Date gettedDatePickerDate = java.sql.Date.valueOf(datePicker.getValue());
+//    	datenow = gettedDatePickerDate;
+    	
+    	
+   
+    	
+    	
+    }
     
     @FXML
     void onActionTerminVerschieben(ActionEvent event){
@@ -769,10 +788,7 @@ public class PatientsController {
     		SPE=SPE_ID;
     		REHA=REHA_ID;
     		IDPA=PAT_ID;
-    		System.out.println("HA = "+HA);
-    		System.out.println("HA_ID= " +HA_ID);
-    		System.out.println("PAT_ID = " + PAT_ID);
-    		System.out.println("IDPA = " + IDPA);
+
     		PreparedStatement pst = con.prepareStatement(query3);
     		pst.setString(1, HA);
             pst.setString(2,SPI);
@@ -798,9 +814,42 @@ public class PatientsController {
     
     @FXML
     void onActionSave(ActionEvent event) {
+    	java.sql.Date gettedDatePickerDate = java.sql.Date.valueOf(datumwahl.getValue());
+    	datenow = gettedDatePickerDate;
     	
+    	
+    	String newT="";
+    	String newStat="";
+    	int IDT;
+    	String IDPA="";
+    	Date newDate;
+    	
+    	
+    	    MyConn co = new MyConn();
+        	con=co.getconn();
+        	
+            String query = " insert into Termine (ID_Termin, Name, Datum, Patient, Zustand)"
+                    + " values (?, ?, ?, ?, ?)";
+    	try {        		
+    		newT= newAppo;
+    		newDate=datenow;
+    		newStat=newStatus;
+    		IDT= TerminIDs +1;
+    		IDPA=PAT_ID;
 
-    }
+    		PreparedStatement pst = con.prepareStatement(query);
+    		pst.setInt(1, IDT);
+            pst.setString(2,newT);
+            pst.setDate(3,newDate);
+            pst.setString(4, IDPA);
+            pst.setString(5, newStat);
+            pst.executeUpdate();
+    	
+    	}
+    	catch(Exception exc) {
+    		exc.getMessage();
+    	}
+    	}
 
     @FXML
     private ResourceBundle resources;
@@ -902,6 +951,23 @@ public class PatientsController {
     
 	@SuppressWarnings("rawtypes")
 	@FXML
+	ObservableList Zustand() throws SQLException {
+		ObservableList<String> listZustand = FXCollections.observableArrayList();
+		MyConn co = new MyConn();
+		con=co.getconn();
+		Statement st5 = con.createStatement();
+		String query5 = "Select Zustand from Termine";
+		ResultSet rs5 = st5.executeQuery(query5);
+		while(rs5.next()){
+			listZustand.add(rs5.getString("Zustand"));
+		}
+		con.close();
+		return listZustand;
+	}
+	
+	
+	@SuppressWarnings("rawtypes")
+	@FXML
 	ObservableList Apotheke() throws SQLException {
 		ObservableList<String> listApotheke = FXCollections.observableArrayList();
 		MyConn co = new MyConn();
@@ -950,7 +1016,6 @@ public class PatientsController {
     	statusBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {
             	newStatus=(String) statusBox.getItems().get((Integer) number2);
-            	System.out.println("staus= " + newStatus);
             	
             }
             
@@ -961,6 +1026,22 @@ public class PatientsController {
     	terminwahl.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {
             	newAppo=(String) terminwahl.getItems().get((Integer) number2);
+             	int count=0;
+               	MyConn co = new MyConn();
+            	con=co.getconn();
+            	String query ="Select COUNT(*) AS total From Termine";
+            	try {
+            		PreparedStatement pst=con.prepareStatement(query);
+               		ResultSet rs=pst.executeQuery();
+               		while (rs.next()){
+               		count = rs.getInt("total");
+               		TerminIDs = count;
+               		}
+            	}
+                	catch (SQLException e1) {
+                		e1.printStackTrace();
+                	
+                	}
             }
             
           });
@@ -1185,6 +1266,9 @@ public class PatientsController {
     	spezialistwahl.setItems(Spezialist());
     	
     	terminwahlV.setItems(Termine());
+    	
+    	statusBox.setItems(Zustand());
+    	
     		
         
         /**
@@ -1438,19 +1522,36 @@ public class PatientsController {
         /**Beim Status wird neben dem Text noch eine Farbe definiert und die Termine unterscheiden zu koennen
          * nach offene Termine, erledigte Termine oder verschobene Termine. 
          */
-       
-        Label fertigText = new Label("Erledigt");
-        fertigText.setTextFill(Color.BLACK);
-       
-        Label offenText = new Label("Offen");
-        offenText.setTextFill(Color.BLACK);
-      
-        Label verschobenText = new Label("Verschoben");
-        verschobenText.setTextFill(Color.BLACK);
-        
-        //hinzufuegen des Status mit Farbbild
-		statusBox.getItems().addAll(fertigText, offenText, verschobenText);
-		
+//        Image fertig = new Image("fertig.png");
+//        ImageView imgViewFertig = new ImageView();
+//        imgViewFertig.setImage(fertig);
+//        imgViewFertig.setFitWidth(10);
+//        imgViewFertig.setFitHeight(10);
+//        Label fertigText = new Label("Erledigt");
+//        fertigText.setGraphic(imgViewFertig);
+//        fertigText.setTextFill(Color.BLACK);
+//        
+//        Image offen = new Image("offen.png");
+//        ImageView imgViewOffen = new ImageView();
+//        imgViewOffen.setImage(offen);
+//        imgViewOffen.setFitWidth(10);
+//        imgViewOffen.setFitHeight(10);
+//        Label offenText = new Label("Offen");
+//        offenText.setGraphic(imgViewOffen);
+//        offenText.setTextFill(Color.BLACK);
+//        
+//        Image verschoben = new Image("verschoben.png");
+//        ImageView imgViewVerschoben = new ImageView();
+//        imgViewVerschoben.setImage(verschoben);
+//        imgViewVerschoben.setFitWidth(10);
+//        imgViewVerschoben.setFitHeight(10);
+//        Label verschobenText = new Label("Verschoben");
+//        verschobenText.setGraphic(imgViewVerschoben);
+//        verschobenText.setTextFill(Color.BLACK);
+//        
+//        //hinzufuegen des Status mit Farbbild
+//		statusBox.getItems().addAll(fertigText, offenText, verschobenText);
+//		
     	}
     
     public void postInit() {
