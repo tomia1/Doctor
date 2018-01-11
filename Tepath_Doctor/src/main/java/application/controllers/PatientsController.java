@@ -1438,31 +1438,14 @@ public class PatientsController {
         /**Beim Status wird neben dem Text noch eine Farbe definiert und die Termine unterscheiden zu koennen
          * nach offene Termine, erledigte Termine oder verschobene Termine. 
          */
-        Image fertig = new Image("fertig.png");
-        ImageView imgViewFertig = new ImageView();
-        imgViewFertig.setImage(fertig);
-        imgViewFertig.setFitWidth(10);
-        imgViewFertig.setFitHeight(10);
+       
         Label fertigText = new Label("Erledigt");
-        fertigText.setGraphic(imgViewFertig);
         fertigText.setTextFill(Color.BLACK);
-        
-        Image offen = new Image("offen.png");
-        ImageView imgViewOffen = new ImageView();
-        imgViewOffen.setImage(offen);
-        imgViewOffen.setFitWidth(10);
-        imgViewOffen.setFitHeight(10);
+       
         Label offenText = new Label("Offen");
-        offenText.setGraphic(imgViewOffen);
         offenText.setTextFill(Color.BLACK);
-        
-        Image verschoben = new Image("verschoben.png");
-        ImageView imgViewVerschoben = new ImageView();
-        imgViewVerschoben.setImage(verschoben);
-        imgViewVerschoben.setFitWidth(10);
-        imgViewVerschoben.setFitHeight(10);
+      
         Label verschobenText = new Label("Verschoben");
-        verschobenText.setGraphic(imgViewVerschoben);
         verschobenText.setTextFill(Color.BLACK);
         
         //hinzufuegen des Status mit Farbbild
