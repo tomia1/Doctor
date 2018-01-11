@@ -20,6 +20,8 @@ import com.gluonhq.particle.application.ParticleApplication;
 import com.gluonhq.particle.view.ViewManager;
 
 import application.MyConn;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -59,6 +61,9 @@ public class PatientsController {
     
     @FXML
     private AnchorPane patients;
+    
+    @FXML
+    private Label IDText;
 
     @FXML
     private Label PatientendatenL;
@@ -656,6 +661,8 @@ public class PatientsController {
     @FXML
     private Button speichernTerminVerschieben;
     
+    
+    
     @FXML
     void onActionTerminVerschieben(ActionEvent event){
     	Object term = terminwahlV.getSelectionModel().getSelectedItem();
@@ -673,16 +680,10 @@ public class PatientsController {
     		//String date = datum.toString();
     		String zustand = "";
     		while(rs.next()){
-//    			name = rs.getString("Name");
-//    			datum = rs.getDate("Datum");
-//    			zustand = rs.getString("Zustand");
     			statusBoxV.getSelectionModel().select(zustand);
     			datumwahlV.setValue(datum.toLocalDate());
     		}
-//    		if (terminA.equals(name)){
-//    			statusBoxV.setValue(zustand);
-//    			datumwahlV.setValue(datum.toLocalDate());
-//    		}
+
     		con.close();
     	}
     	catch(Exception exc){
@@ -692,44 +693,54 @@ public class PatientsController {
     
     @FXML
     void onActionSaveDaten(ActionEvent event) {
+    	
+    	MyConn co = new MyConn();
+    	con=co.getconn();
+    	String query3 ="update Patienten set Username=?, Password=? where ID_Patient=?";
+//    	String query2 ="select * Patienten";
+//    	
+//    		String _user="";
+//			String _pass="";
+			String user = "";
+			String pswd = "";
+			String ID = "";
+			
+    	
     	try{
-    		MyConn co = new MyConn();
-    		con=co.getconn();
-			Statement myStmt = con.createStatement();
-			ResultSet myRs = myStmt.executeQuery("select * from Patienten");
-			ResultSet gleichUser = myStmt.executeQuery("select Username from Patienten");
-			ResultSet gleichPassw = myStmt.executeQuery("select Password from Patienten");
-			ResultSet nachN = myStmt.executeQuery("select Nachname from Patienten");
-			ResultSet vorN = myStmt.executeQuery("select Vorname from Patienten");
-			String user = benutzerText.getText();
-			String pswd = passwortText.getText();
-			String patient = vorN+" "+nachN;
-//			String patient = patientenwahl.selectionModelProperty().getValue().toString();
-//			String[] splitted = ((String) patient).split(" ");
-//    		String vorname = splitted[0];
-//    		String nachname = splitted[splitted.length];
-			while (myRs.next() ) {
-				myStmt.executeUpdate("Update Patienten Set Username="+user+", Password="+pswd+" Where "+patient.equals(patientenwahl.selectionModelProperty().getValue())+"");
-//				myStmt.executeUpdate("Insert INTO [dbo].[Patienten]([Username],[Password]) VALUES ('"+ user+"','"+pswd+"')"
-//						+ "WHERE Vorname="+patient+"");
-//				myStmt.executeUpdate("Insert INTO Password VALUES ('"+ pswd+"')");
-			}
-			if (benutzerText.getText().equals(null) || passwortText.getText().equals(null)) {
-				myStmt.cancel();
-				benutzerText.setText(null);
-				passwortText.setText(null);
-			}
-			else if(benutzerText.getText().equals(gleichUser) || passwortText.getText().equals(gleichPassw)) {
-				myStmt.cancel();
-				myStmt.clearBatch();
-				benutzerText.setText(null);
-				passwortText.setText(null);
-				benutzerText.setPromptText("Benutzer existiert bereits!");
-			}
-			myRs.close();
-			gleichUser.close();
-			gleichPassw.close();
-			con.close();
+    		
+    		user = benutzerText.getText();
+			pswd = passwortText.getText();
+			ID = IDText.getText();
+			PreparedStatement pst = con.prepareStatement(query3);
+		pst.setString(1, user);
+        pst.setString(2,pswd);
+        pst.setString(3,ID);
+        pst.executeUpdate();
+		benutzerText.setText(null);
+		passwortText.setText(null);
+		benutzerText.setPromptText("gespeichert");
+		passwortText.setPromptText("gespeichert");
+//			PreparedStatement ps = con.prepareStatement(query2);
+//			ResultSet rs=pst.executeQuery();
+			
+//			while (rs.next()){
+//				_user=rs.getString("Username");
+//				_pass=rs.getString("Password");
+//								
+//			}
+//			if (user.equals(null) || pswd.equals(null)) {
+//				benutzerText.setText(null);
+//				passwortText.setText(null);
+//				benutzerText.setPromptText("Benutzer oder Passwort nicht angegeben!");
+//				
+//			}
+//			else if(user.equals(_user) ) {
+//				benutzerText.setText(null);
+//				passwortText.setText(null);
+//				benutzerText.setPromptText("Benutzername existiert bereits");
+//				
+//			}
+//			else {}
 		}
 		catch(Exception exc){
 			exc.getMessage();
@@ -739,104 +750,44 @@ public class PatientsController {
     
     @FXML
     void onActionSaveKontakte(ActionEvent event) {
-    	try {
-    		MyConn co = new MyConn();
-    		con = co.getconn();
-    		Statement myStmt = con.createStatement();
-    		
-    		Object user = patientenwahl.getSelectionModel().getSelectedItem();
-    		String[] splitted = ((String) user).split(" ");
-    		String vorname = splitted[0];
-    		String nachname = splitted[splitted.length];
-//    	Object hausAr = hausarztwahl.getSelectionModel().getSelectedItem();
-//    	String hausA = hausAr.toString();
-//    	Object spitalWa = spitalwahl.getSelectionModel().getSelectedItem();
-//    	String spitalW = spitalWa.toString();
-//    	Object rehaWa = rehawahl.getSelectionModel().getSelectedItem();
-//    	String rehaW = rehaWa.toString();
-//    	Object apoWa = apothekenwahl.getSelectionModel().getSelectedItem();
-//    	String apoW = apoWa.toString();
-//    	Object spezAr = spezialistwahl.getSelectionModel().getSelectedItem();
-//    	String spezA = spezAr.toString();
-    	ResultSet myRs = myStmt.executeQuery("select * FROM Patienten INNER JOIN Hausarzt");
-    	//ResultSet rsName = myStmt.executeQuery("select Vorname FROM Patienten");
-    	while (myRs.next()){
-//    		if(vorname.equals(rsName)){
-//        	myStmt.executeUpdate("Insert INTO [dbo].[Patienten]([Hausarzt], [Apotheke], [Spezialist], [Reha], [Spital]) "
-//        			+ "VALUES('"+hausarztwahl.selectionModelProperty().getValue()+"', '"+apothekenwahl.selectionModelProperty().getValue()+"',"
-//        					+ "'"+spezialistwahl.selectionModelProperty().getValue()+"', "
-//        							+ "'"+rehawahl.selectionModelProperty().getValue()+"', "
-//        									+ "'"+spitalwahl.selectionModelProperty().getValue()+"')");
-//        }
-    		myStmt.executeUpdate("UPDATE Patienten " +
-                  "SET Hausarzt='"+hausarztwahl.selectionModelProperty().getValue()+"', "
-                  		+ "Spital='"+spitalwahl.selectionModelProperty().getValue()+"', "
-                  				+ "Apotheke='"+apothekenwahl.selectionModelProperty().getValue()+"', "
- 				+ "Reha='"+rehawahl.selectionModelProperty().getValue()+"', "
- 						+ "Spezialist='"+spezialistwahl.selectionModelProperty().getValue()+"' "
- 								+ "WHERE Vorname="+vorname+"");
-    	}
-    			
-//    		 String sql = "UPDATE Patienten " +
-//                     "SET Hausarzt='"+hausA+"', Spital='"+spitalW+"', Apotheke='"+apoW+"', "
-//    				+ "Reha='"+rehaW+"', Spezialist='"+spezA+"' WHERE Vorname="+vorname+"";
-//        myStmt.executeUpdate(sql);
-
-        // Now you can extract all the records
-        // to see the updated records
-//        sql = "SELECT Vorname, Nachname, Hausarzt, Spital, Apotheke, Reha, Spezialist FROM Patienten";
-        //ResultSet rs = myStmt.executeQuery(sql);
-        
-//    		ResultSet myRs = myStmt.executeQuery("select * FROM Patienten");
-//    		//ResultSet resV = myStmt.executeQuery("select Vorname FROM Patienten");
-//    		//ResultSet resN = myStmt.executeQuery("select Nachname FROM Patienten");
-//    		Object user = patientenwahl.getSelectionModel().getSelectedItem();
-//    		String[] splitted = ((String) user).split(" ");
-//    		String vorname = splitted[0];
-//    		String nachname = splitted[splitted.length];
-//    	Object hausAr = hausarztwahl.getSelectionModel().getSelectedItem();
-//    	String hausA = hausAr.toString();
-//    	Object spitalWa = spitalwahl.getSelectionModel().getSelectedItem();
-//    	String spitalW = spitalWa.toString();
-//    	Object rehaWa = rehawahl.getSelectionModel().getSelectedItem();
-//    	String rehaW = rehaWa.toString();
-//    	Object apoWa = apothekenwahl.getSelectionModel().getSelectedItem();
-//    	String apoW = apoWa.toString();
-//    	Object spezAr = spezialistwahl.getSelectionModel().getSelectedItem();
-//    	String spezA = spezAr.toString();
-//    	while(myRs.next()){
-//    		//if(vorname.equals(resV) && nachname.equals(resN)){
-//    		myStmt.executeUpdate("UPDATE Patienten SET Hausarzt='"+hausA+"', Spital='"+spitalW+"', Apotheke='"+apoW+"', "
-//    				+ "Reha='"+rehaW+"', Spezialist='"+spezA+"' WHERE Vorname='"+vorname+"', Nachname=' "+nachname+"'");
-//    		//}
-    		
-//    	if(hausA.equals(null)) {
-//    		myStmt.cancel();
-//			myStmt.clearBatch();
-//    	}
-//    	else if(spitalW.equals(null)) {
-//    		myStmt.cancel();
-//			myStmt.clearBatch();
-//    	}
-//    	else if(rehaW.equals(null)) {
-//    		myStmt.cancel();
-//			myStmt.clearBatch();
-//    	}
-//    	else if(apoW.equals(null)) {
-//    		myStmt.cancel();
-//			myStmt.clearBatch();
-//    	}
-//    	else if(spezA.equals(null)) {
-//    		myStmt.cancel();
-//			myStmt.clearBatch();
-//    	}
-    	myRs.close();
-    	con.close();
+    	
+    	String HA="";
+    	String SPI="";
+    	String SPE="";
+    	String APO="";
+    	String REHA="";
+    	String IDPA="";
+    	
+    	    MyConn co = new MyConn();
+        	con=co.getconn();
+//        	String query3 ="update Patienten set Username=?, Password=? where ID_Patient=?";
+        	String query3 ="update Patienten set Hausarzt=?, Spital=?, Apotheke=?, Reha=?, Spezialist=? WHERE ID_Patient=?";
+    	try {        		
+    		HA= HA_ID;
+    		SPI=SPI_ID;
+    		APO=APO_ID;
+    		SPE=SPE_ID;
+    		REHA=REHA_ID;
+    		IDPA=PAT_ID;
+    		System.out.println("HA = "+HA);
+    		System.out.println("HA_ID= " +HA_ID);
+    		System.out.println("PAT_ID = " + PAT_ID);
+    		System.out.println("IDPA = " + IDPA);
+    		PreparedStatement pst = con.prepareStatement(query3);
+    		pst.setString(1, HA);
+            pst.setString(2,SPI);
+            pst.setString(3,APO);
+            pst.setString(4, REHA);
+            pst.setString(5, SPE);
+            pst.setString(6, IDPA);
+            pst.executeUpdate();
+    	
     	}
     	catch(Exception exc) {
     		exc.getMessage();
     	}
-}
+    	}
+
   
 
     
@@ -848,22 +799,7 @@ public class PatientsController {
     @FXML
     void onActionSave(ActionEvent event) {
     	
-    	speichern.onActionProperty();
-    	terminwahl.getSelectionModel().getSelectedItem();
-    	terminwahl1.getSelectionModel().getSelectedItem();
-    	terminwahl2.getSelectionModel().getSelectedItem();
-    	terminwahl3.getSelectionModel().getSelectedItem();
-    	terminwahl4.getSelectionModel().getSelectedItem();
-    	terminwahl5.getSelectionModel().getSelectedItem();
-    	terminwahl6.getSelectionModel().getSelectedItem();
-    	terminwahl7.getSelectionModel().getSelectedItem();
-    	terminwahl8.getSelectionModel().getSelectedItem();
-    	terminwahl9.getSelectionModel().getSelectedItem();
-    	terminwahl10.getSelectionModel().getSelectedItem();
-    	terminwahl11.getSelectionModel().getSelectedItem();
-    	terminwahl12.getSelectionModel().getSelectedItem();
-    	terminwahl13.getSelectionModel().getSelectedItem();
-    	terminwahl14.getSelectionModel().getSelectedItem();
+
     }
 
     @FXML
@@ -998,15 +934,245 @@ public class PatientsController {
 	
 	
 	
+	public String HA_ID ="";
+	public String SPI_ID="";
+	public String APO_ID="";
+	public String SPE_ID="";
+	public String REHA_ID="";
+	public String PAT_ID="";
+	public String newAppo="";
+	public String newStatus="";
+	
+	
     @SuppressWarnings("unchecked")
 	public void initialize() throws SQLException{
+    	
+    	statusBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {
+            	newStatus=(String) statusBox.getItems().get((Integer) number2);
+            	System.out.println("staus= " + newStatus);
+            	
+            }
+            
+          });
+    	
+    	
+    	//new
+    	terminwahl.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {
+            	newAppo=(String) terminwahl.getItems().get((Integer) number2);
+            }
+            
+          });
+            	
+     
+    	
+    	//new
+     	rehawahl.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {        		
+            	MyConn co = new MyConn();
+            	con=co.getconn();
+            	String query1 ="Select * from Reha where Name=?";
+            	
+            	String _name ="";
+            	String IDDB_REHA ="";            	
+            	try{
+    	
+            		_name = (String) rehawahl.getItems().get((Integer) number2);
+                		PreparedStatement pst=con.prepareStatement(query1);
+                		pst.setString(1,_name);
+                		ResultSet rs=pst.executeQuery();
+                		
+                		while (rs.next()){
+                			IDDB_REHA=rs.getString("ID_Reha");		
+                			REHA_ID=IDDB_REHA;
+                		}
+                		
+                		
+                	}
+                	catch (SQLException e1) {
+                		e1.printStackTrace();
+                	
+                	}
+            }
+          });
+    	//new
+     	spezialistwahl.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {
+            	MyConn co = new MyConn();
+            	con=co.getconn();
+            	String query1 ="Select * from Spezialist where Name=?";
+        		
+            	String _name ="";
+            	String IDDB_SPE ="";            	
+            	try{
+    	
+            		_name = (String) spezialistwahl.getItems().get((Integer) number2);
+                		PreparedStatement pst=con.prepareStatement(query1);
+                		pst.setString(1,_name);
+                		ResultSet rs=pst.executeQuery();
+                		
+                		while (rs.next()){
+                			IDDB_SPE=rs.getString("ID_Spezialist");		
+                			SPE_ID=IDDB_SPE;
+                		}
+                		
+                		
+                	}
+                	catch (SQLException e1) {
+                		e1.printStackTrace();
+                	
+                	}
+            }
+          });
+    	
+    	//new
+     	apothekenwahl.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {
+            	MyConn co = new MyConn();
+            	con=co.getconn();
+            	String query1 ="Select * from Apothek where Name=?";
+        		
+            	String _name ="";
+            	String IDDB_APO ="";            	
+            	try{
+    	
+            		_name = (String) apothekenwahl.getItems().get((Integer) number2);
+                		PreparedStatement pst=con.prepareStatement(query1);
+                		pst.setString(1,_name);
+                		ResultSet rs=pst.executeQuery();
+                		
+                		while (rs.next()){
+                			IDDB_APO=rs.getString("ID_Apotheke");		
+                			APO_ID=IDDB_APO;
+                		}
+                		
+                		
+                	}
+                	catch (SQLException e1) {
+                		e1.printStackTrace();
+                	
+                	}
+            }
+          });
+    	
+    	//new
+    	spitalwahl.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {
+            	MyConn co = new MyConn();
+            	con=co.getconn();
+            	String query1 ="Select * from Spital where Name=?";
+        		
+            	String _name ="";
+            	String IDDB_SPI ="";            	
+            	try{
+    	
+            		_name = (String) spitalwahl.getItems().get((Integer) number2);
+                		PreparedStatement pst=con.prepareStatement(query1);
+                		pst.setString(1,_name);
+                		ResultSet rs=pst.executeQuery();
+                		
+                		while (rs.next()){
+                			IDDB_SPI=rs.getString("ID_Spital");		
+                			SPI_ID=IDDB_SPI;
+                		}
+                		
+                		
+                	}
+                	catch (SQLException e1) {
+                		e1.printStackTrace();
+                	
+                	}
+            }
+          });
+    	
+    	//new
+    	hausarztwahl.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {
+            	MyConn co = new MyConn();
+            	con=co.getconn();
+            	String query1 ="Select * from Hausarzt where Name=?";
+        		
+            	String _name ="";
+            	String IDDB_HA ="";            	
+            	try{
+    	
+            		_name = (String) hausarztwahl.getItems().get((Integer) number2);
+                		PreparedStatement pst=con.prepareStatement(query1);
+                		pst.setString(1,_name);
+                		ResultSet rs=pst.executeQuery();
+                		
+                		while (rs.next()){
+                			IDDB_HA=rs.getString("ID_Hausarzt");		
+                			HA_ID=IDDB_HA;
+                			
+                		}
+                		
+                		
+                	}
+                	catch (SQLException e1) {
+                		e1.printStackTrace();
+                	
+                	}
+            }
+          });
+            		
+    	//new
+    	patientenwahl.setItems(GetName());
+    	
+        patientenwahl.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {
+            	MyConn co = new MyConn();
+            	con=co.getconn();
+            	String query1 ="Select * from Patienten where Vorname=?";
+        		
+            	String _vorname ="";
+            	String IDDB ="";
+            	String usernDB="";
+            	String pwDB="";
+            	
+            	try{
+            	_vorname = (String) patientenwahl.getItems().get((Integer) number2);
+            	String[] splitStr = _vorname.split("\\s+");
+            		PreparedStatement pst=con.prepareStatement(query1);
+            		pst.setString(1,splitStr[0]);
+            		ResultSet rs=pst.executeQuery();
+            		
+            		while (rs.next()){
+            			IDDB=rs.getString("ID_Patient");
+            			usernDB=rs.getString("Username");
+            			pwDB=rs.getString("Password");		
+            			IDText.setText(IDDB);
+            			PAT_ID = IDDB;
+            			benutzerText.setText(usernDB);
+            			passwortText.setText(pwDB);
+            			
+            		}
+            		
+            		
+            	}
+            	catch (SQLException e1) {
+            		e1.printStackTrace();
+            	
+            	}
+
+            }
+          });
+    	
+
         ActionMap.register(this);
         actionHome =  ActionMap.action("goHome");
         
         /**
          * Die Listen die vorher erstellt wurden, werden hier den Choiceboxen hinzugefuegt.
          */
-        patientenwahl.setItems(GetName());
+
         
     	hausarztwahl.setItems(Hausarzt());
     		
@@ -1301,20 +1467,6 @@ public class PatientsController {
         
         //hinzufuegen des Status mit Farbbild
 		statusBox.getItems().addAll(fertigText, offenText, verschobenText);
-		statusBox1.getItems().addAll(fertigText, offenText, verschobenText);
-		statusBox2.getItems().addAll(fertigText, offenText, verschobenText);
-		statusBox3.getItems().addAll(fertigText, offenText, verschobenText);
-		statusBox4.getItems().addAll(fertigText, offenText, verschobenText);
-		statusBox5.getItems().addAll(fertigText, offenText, verschobenText);
-		statusBox6.getItems().addAll(fertigText, offenText, verschobenText);
-		statusBox7.getItems().addAll(fertigText, offenText, verschobenText);
-		statusBox8.getItems().addAll(fertigText, offenText, verschobenText);
-		statusBox9.getItems().addAll(fertigText, offenText, verschobenText);
-		statusBox10.getItems().addAll(fertigText, offenText, verschobenText);
-		statusBox11.getItems().addAll(fertigText, offenText, verschobenText);
-		statusBox12.getItems().addAll(fertigText, offenText, verschobenText);
-		statusBox13.getItems().addAll(fertigText, offenText, verschobenText);
-		statusBox14.getItems().addAll(fertigText, offenText, verschobenText);
 		
     	}
     
