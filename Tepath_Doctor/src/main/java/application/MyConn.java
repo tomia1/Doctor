@@ -1,6 +1,14 @@
 package application;
 import java.sql.*;
-
+/**
+ * Die Klasse MyConn ist für die Verbindung mit der Datenbank zuständig.
+ * Da wir eine Klasse für die Datenbankverbindung erstellt haben, muss die ganze Information und die 
+ * Verbindung zur Datenbank nicht bei jeder Datenbankabfrage in jeder Klasse geschrieben werden.
+ * Für die Datenbankverbindung braucht es das URL der Datenbank sowie das PAsswort und der Benutzername. 
+ * Diese werden alle hier festgelegt.
+ * @author Hager
+ *
+ */
 public class MyConn {
 
     String URL ;

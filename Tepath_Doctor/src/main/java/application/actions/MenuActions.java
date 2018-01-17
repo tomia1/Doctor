@@ -8,7 +8,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javax.inject.Inject;
 import org.controlsfx.control.action.ActionProxy;
-
+/**
+ * In dieser Klasse wird festgelegt, was bei den einzelnen Menüauwahl angezeigt wird.
+ * Wir haben in der Menüauswahl About Informationen über die Applikation definiert. In der Menüauswahl
+ * Kontank haben wir Möglichkeit zur Kontaktaufnahme festgelegt. Momentan sind es nichtexistierende Webseite 
+ * Mailadresse der Produkthersteller. Das Exit(schliessen der Applikation) ist in dieser Klasse auch definiert.
+ * @author Hager
+ *
+ */
 @ParticleActions
 public class MenuActions {
 
